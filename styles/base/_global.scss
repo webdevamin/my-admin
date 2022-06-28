@@ -1,0 +1,33 @@
+* {
+  @apply text-dark;
+
+  text-shadow: 0px 0px 0.5px rgb(0 0 0 / 10%);
+}
+
+html,
+body {
+  @apply bg-white;
+}
+
+label {
+  display: none;
+}
+
+.input_container {
+  @apply w-full mb-4;
+}
+
+input,
+button,
+.button,
+.input {
+  @apply rounded-xl p-4 border-none w-full bg-light;
+}
+
+.icon {
+  @apply p-3 rounded-xl w-5 h-5 shadow-lg;
+
+  * {
+    @apply text-white;
+  }
+}

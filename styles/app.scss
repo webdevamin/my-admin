@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "base/global";
+@import "base/typography";
+
+@import "components/button";
+@import "components/input";
+@import "components/error";
+@import "components/card";
+
+@import "sections/intro";

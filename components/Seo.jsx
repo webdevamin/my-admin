@@ -1,18 +1,16 @@
 import Head from "next/head";
-
-const defaultTitle = `${process.env.NEXT_PUBLIC_APP_NAME}`;
-const defaultDescription = 'Administratie app';
+import { APP_NAME } from "../config/app";
 
 const Seo = ({ title, description }) => {
     return (
         <Head>
             <meta charSet="utf-8" />
-            <meta name="application-name" content={process.env.NEXT_PUBLIC_APP_NAME} />
+            <meta name="application-name" content={APP_NAME} />
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-            <meta name="apple-mobile-web-app-title" content={process.env.NEXT_PUBLIC_APP_NAME} />
-            <title>{title ?? defaultTitle}</title>
-            <meta name="description" content={description ?? defaultDescription} />
+            <meta name="apple-mobile-web-app-title" content={APP_NAME} />
+            <title>{title ?? APP_NAME}</title>
+            <meta name="description" content={description ?? "Administratie app"} />
             <meta name="format-detection" content="telephone=no" />
             <meta name="mobile-web-app-capable" content="yes" />
             <meta name="theme-color" content={process.env.NEXT_PUBLIC_APP_THEME} />

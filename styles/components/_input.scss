@@ -1,0 +1,5 @@
+input,
+.input {
+  @apply active:border-theme focus:outline-none 
+  focus:ring-1 focus:ring-theme focus:ring-opacity-50;
+}

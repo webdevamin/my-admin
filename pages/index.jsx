@@ -1,11 +1,110 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import { useRouter } from "next/router";
+import { useState, useEffect } from 'react';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, deleteUser } from "firebase/auth";
+import { getUserByUid } from "../config/userStorage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { APP_NAME } from "../config/app";
+import app from "../config/firebase";
+
+const initForm = {
+  email: '', password: ''
+}
 
 const Home = () => {
+  const router = useRouter();
+  const [form, setForm] = useState(initForm);
+  const [error, setError] = useState(false);
+  const auth = getAuth(app);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { email, password } = form;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setError(false);
+        const user = userCredential.user;
+
+        localStorage.setItem('uid', user.uid);
+        router.push('/dashboard');
+      })
+      .catch((err) => {
+        setError(true);
+        console.log(err.code)
+        console.log(err.message)
+      })
+
+    setForm(initForm);
+  }
+
+  const handleChange = (e) => {
+    const { target } = e;
+    const { name, value } = target;
+
+    setForm({ ...form, [name]: value });
+  }
+
+  useEffect(() => {
+    // console.log(auth.signOut())
+    // deleteUser(user);
+    // auth.signOut();
+    onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if (user) {
+        const fetchedUid = user.uid;
+        const localUid = getUserByUid();
+
+        if (fetchedUid === localUid) router.replace("/dashboard");
+      }
+    });
+  }, [auth, router]);
+
   return (
-    <>
-      <h1>Home</h1>
-    </>
+    <div className='mt-20'>
+      <section className='intro'>
+        <h1 className="text-3xl mb-5">Welkom terug</h1>
+        <p>Welkom terug op {APP_NAME}! Login met uw gegevens om door te gaan.</p>
+      </section>
+      <section>
+        <form onSubmit={handleSubmit}>
+          {
+            error && (
+              <div className='error'>
+                <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation"
+                  className='error_icon' />
+                <p className="error_text" role="alert">
+                  Onjuiste e-mailadres/wachtwoord
+                </p>
+              </div>
+            )
+          }
+          <div>
+            <div className="input_container">
+              <label htmlFor="email">
+                Email address
+              </label>
+              <input type="email" name="email" id="email" required
+                placeholder='E-mailadres' value={form.email}
+                onChange={handleChange} />
+            </div>
+            <div className="input_container">
+              <label htmlFor="password">
+                Password
+              </label>
+              <input type="password" name="password" id="password" required
+                placeholder='Wachtwoord' value={form.password}
+                onChange={handleChange} />
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" className='btn_shadow'>
+              <span>Inloggen</span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
   )
 }
 

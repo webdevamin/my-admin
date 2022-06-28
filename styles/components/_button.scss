@@ -1,0 +1,14 @@
+button,
+.button,
+[type="submit"] {
+  @apply bg-theme text-white font-bold mt-5;
+
+  span {
+    @apply text-white;
+  }
+}
+
+.btn_shadow {
+  box-shadow: 0px 20px 30px -10px;
+  @apply text-theme transition hover:bg-opacity-90;
+}
