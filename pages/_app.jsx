@@ -2,12 +2,12 @@ import Layout from "../components/Layout";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faTriangleExclamation, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import "../styles/app.scss";
 
 config.autoAddCss = false;
 
-library.add(faTrash, faTriangleExclamation);
+library.add(faTrash, faTriangleExclamation, faPowerOff);
 
 const MyApp = ({ Component, pageProps }) => {
   return (

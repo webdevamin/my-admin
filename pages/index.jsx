@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from 'react';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, deleteUser } from "firebase/auth";
-import { getUserByUid } from "../config/userStorage";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { APP_NAME } from "../config/app";
 import app from "../config/firebase";
+import Cookies from 'js-cookie';
 
 const initForm = {
   email: '', password: ''
@@ -21,15 +21,10 @@ const Home = () => {
     const { email, password } = form;
 
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setError(false);
-        const user = userCredential.user;
-
-        localStorage.setItem('uid', user.uid);
-        router.push('/dashboard');
-      })
+      .then(() => setError(false))
       .catch((err) => {
         setError(true);
+
         console.log(err.code)
         console.log(err.message)
       })
@@ -45,16 +40,12 @@ const Home = () => {
   }
 
   useEffect(() => {
-    // console.log(auth.signOut())
-    // deleteUser(user);
-    // auth.signOut();
     onAuthStateChanged(auth, (user) => {
-      console.log(user);
       if (user) {
-        const fetchedUid = user.uid;
-        const localUid = getUserByUid();
-
-        if (fetchedUid === localUid) router.replace("/dashboard");
+        if (!Cookies.get('fb_admin_uid')) {
+          Cookies.set('fb_admin_uid', user.uid);
+        }
+        router.push('/dashboard');
       }
     });
   }, [auth, router]);

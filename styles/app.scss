@@ -5,9 +5,11 @@
 @import "base/global";
 @import "base/typography";
 
+@import "layout/header";
+
+@import "sections/intro";
+
 @import "components/button";
 @import "components/input";
 @import "components/error";
 @import "components/card";
-
-@import "sections/intro";

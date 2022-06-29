@@ -1,4 +1,10 @@
 .card {
   @apply bg-light rounded-2xl flex justify-between 
-  p-4 mb-3 shadow-sm;
+  p-4 mb-3 shadow-sm items-center;
+
+  .info {
+    span {
+      @apply text-sm;
+    }
+  }
 }
