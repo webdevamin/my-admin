@@ -1,7 +1,28 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
+import app from "../config/firebase";
+import { collection, getFirestore, onSnapshot } from "firebase/firestore";
 
 const Dashboard = () => {
+    const [reservations, setReservations] = useState([]);
+    const db = getFirestore(app);
+
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, "reservations"), (snapshot) => {
+            setReservations(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data(),
+                }))
+            );
+        });
+
+        return () => {
+            unsub();
+        };
+    }, [db]);
+    console.log(reservations);
     return (
         <>
             <Header />
