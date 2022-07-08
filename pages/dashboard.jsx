@@ -29,30 +29,42 @@ const Dashboard = () => {
             <main>
                 <h1>Reserveringen</h1>
                 <section>
-                    <article className="card">
-                        <div className="info">
-                            <h2>Mark Hunter</h2>
-                            <span>On Medication</span>
-                        </div>
-                        <FontAwesomeIcon icon="fa-solid fa-trash"
-                            className="icon bg-red" />
-                    </article>
-                    <article className="card">
-                        <div className="info">
-                            <h2>Dane Garring</h2>
-                            <span>On Medication</span>
-                        </div>
-                        <FontAwesomeIcon icon="fa-solid fa-trash"
-                            className="icon bg-red" />
-                    </article>
-                    <article className="card">
-                        <div className="info">
-                            <h2>Matson Mendberg</h2>
-                            <span>On Medication</span>
-                        </div>
-                        <FontAwesomeIcon icon="fa-solid fa-trash"
-                            className="icon bg-red" size="xs" />
-                    </article>
+                    {
+                        reservations.map((reservation) => {
+                            const { id, data } = reservation;
+                            const { name, phone, reservation_time, time_submitted, units } = data;
+
+                            return (
+                                <article className="card" key={id}>
+                                    <div className="card_left">
+                                        <div className="circle">{units}</div>
+                                        <div className="info">
+                                            <h2>{name}</h2>
+                                            <div className="flex items-center gap-2 mt-1">
+                                                <FontAwesomeIcon icon="fa-solid fa-phone"
+                                                    className="text-xs" />
+                                                <span>{phone}</span>
+                                            </div>
+                                            <div className="info_bottom">
+                                                <div>
+                                                    <FontAwesomeIcon icon="fa-solid fa-clock"
+                                                        className="text-xs" />
+                                                    <span>{time_submitted}</span>
+                                                </div>
+                                                <div>
+                                                    <FontAwesomeIcon icon="fa-solid fa-utensils"
+                                                        className="text-xs" />
+                                                    <span>{reservation_time}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <FontAwesomeIcon icon="fa-solid fa-trash"
+                                        className="icon bg-red" />
+                                </article>
+                            )
+                        })
+                    }
                 </section>
             </main>
         </>

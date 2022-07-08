@@ -2,9 +2,31 @@
   @apply bg-light rounded-2xl flex justify-between 
   p-4 mb-3 shadow-sm items-center;
 
+  .card_left {
+    @apply flex justify-center items-center gap-5;
+
+    .circle {
+      @apply bg-dark text-white h-10 w-10 p-7 rounded-full 
+      flex items-center justify-center font-semibold 
+      shadow-xl text-2xl;
+    }
+  }
+
   .info {
     span {
       @apply text-sm;
+    }
+
+    .info_bottom {
+      @apply flex gap-8 mt-2 pt-2 border-t border-t-theme border-opacity-20;
+
+      div {
+        @apply flex items-center gap-2;
+
+        span {
+          @apply text-xs font-bold;
+        }
+      }
     }
   }
 }
