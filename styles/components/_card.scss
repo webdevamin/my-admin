@@ -6,7 +6,7 @@
     @apply flex justify-center items-center gap-5;
 
     .circle {
-      @apply bg-dark text-white h-10 w-10 p-7 rounded-full 
+      @apply bg-dark text-white h-10 w-10 p-6 rounded-full 
       flex items-center justify-center font-semibold 
       shadow-xl text-2xl;
     }
@@ -28,5 +28,9 @@
         }
       }
     }
+  }
+
+  .delete_btn {
+    @apply cursor-pointer;
   }
 }

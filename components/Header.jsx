@@ -16,6 +16,11 @@ const Header = () => {
 
     return (
         <header>
+            <button className='btn_shadow'>
+                <span>
+                    Reserveringen stoppen
+                </span>
+            </button>
             <FontAwesomeIcon icon="fa-solid fa-power-off" size="xl" onClick={handleClick} />
         </header>
     );

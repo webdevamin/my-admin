@@ -1,3 +1,13 @@
 header {
-  @apply flex items-center justify-end mb-4;
+  @apply flex items-center justify-between mb-8;
+
+  .btn_shadow {
+    @apply bg-dark w-auto py-2 px-5 mt-0 rounded-xl text-dark;
+
+    box-shadow: 0px 15px 35px -10px;
+
+    span {
+      @apply font-normal;
+    }
+  }
 }
