@@ -4,9 +4,11 @@ import Header from "../components/Header";
 import app from "../config/firebase";
 import { collection, getFirestore, onSnapshot } from "firebase/firestore";
 import DeleteModal from "../components/DeleteModal";
+import Loader from "../components/Loader";
 
 const Dashboard = () => {
     const [reservations, setReservations] = useState([]);
+    const [loading, setLoading] = useState(true);
     const db = getFirestore(app);
     const deleteModalCompRef = useRef();
 
@@ -18,6 +20,8 @@ const Dashboard = () => {
                     data: doc.data(),
                 }))
             );
+
+            setLoading(false);
         });
 
         return () => {
@@ -28,6 +32,8 @@ const Dashboard = () => {
     const handleOpen = (id) => {
         deleteModalCompRef.current.handleOpen(id);
     };
+
+    if (loading) return <Loader />
 
     return (
         <>

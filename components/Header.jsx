@@ -16,7 +16,7 @@ const Header = () => {
 
     return (
         <header>
-            <button className='btn_shadow'>
+            <button className="btn_shadow">
                 <span>
                     Reserveringen stoppen
                 </span>
