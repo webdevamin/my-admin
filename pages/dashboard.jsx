@@ -5,12 +5,16 @@ import app from "../config/firebase";
 import { collection, getFirestore, onSnapshot } from "firebase/firestore";
 import DeleteModal from "../components/DeleteModal";
 import Loader from "../components/Loader";
+import Seo from "../components/Seo";
+import ReservationInfoModal from "../components/ReservationInfoModal";
 
 const Dashboard = () => {
     const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
     const db = getFirestore(app);
+
     const deleteModalCompRef = useRef();
+    const reservationInfoModalCompRef = useRef();
 
     useEffect(() => {
         const unsub = onSnapshot(collection(db, "reservations"), (snapshot) => {
@@ -33,14 +37,25 @@ const Dashboard = () => {
         deleteModalCompRef.current.handleOpen(id);
     };
 
+    const handleOpenGuide = () => {
+        reservationInfoModalCompRef.current.handleOpen();
+    }
+
     if (loading) return <Loader />
 
     return (
         <>
+            <Seo title={'Dashboard'} description={'Dashboard'} />
             <DeleteModal ref={deleteModalCompRef} />
+            <ReservationInfoModal ref={reservationInfoModalCompRef} />
             <Header />
             <main>
-                <h1>Reserveringen</h1>
+                <section className="heading_section">
+                    <h1>Reserveringen</h1>
+                    <span onClick={handleOpenGuide} className={'cursor-pointer'}>
+                        Help
+                    </span>
+                </section>
                 {
                     reservations.length >= 1 && (
                         <section>

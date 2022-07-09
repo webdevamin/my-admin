@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { APP_NAME } from "../config/app";
 import app from "../config/firebase";
 import Cookies from 'js-cookie';
+import Seo from "../components/Seo";
 
 const initForm = {
   email: '', password: ''
@@ -51,51 +52,54 @@ const Home = () => {
   }, [auth, router]);
 
   return (
-    <div className='mt-20'>
-      <section className='intro'>
-        <h1 className="text-3xl mb-5">Welkom terug</h1>
-        <p>Welkom terug op {APP_NAME}! Login met uw gegevens om door te gaan.</p>
-      </section>
-      <section>
-        <form onSubmit={handleSubmit}>
-          {
-            error && (
-              <div className='error'>
-                <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation"
-                  className='error_icon' />
-                <p className="error_text" role="alert">
-                  Onjuiste e-mailadres/wachtwoord
-                </p>
+    <>
+      <Seo title={'Welkom'} description={'Welkom terug op My Admin. Login om verder te gaan.'}/>
+      <div className='mt-20'>
+        <section className='intro'>
+          <h1 className="text-3xl mb-5">Welkom terug</h1>
+          <p>Welkom terug op {APP_NAME}! Login met uw gegevens om door te gaan.</p>
+        </section>
+        <section>
+          <form onSubmit={handleSubmit}>
+            {
+              error && (
+                <div className='error'>
+                  <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation"
+                    className='error_icon' />
+                  <p className="error_text" role="alert">
+                    Onjuiste e-mailadres/wachtwoord
+                  </p>
+                </div>
+              )
+            }
+            <div>
+              <div className="input_container">
+                <label htmlFor="email">
+                  Email address
+                </label>
+                <input type="email" name="email" id="email" required
+                  placeholder='E-mailadres' value={form.email}
+                  onChange={handleChange} />
               </div>
-            )
-          }
-          <div>
-            <div className="input_container">
-              <label htmlFor="email">
-                Email address
-              </label>
-              <input type="email" name="email" id="email" required
-                placeholder='E-mailadres' value={form.email}
-                onChange={handleChange} />
+              <div className="input_container">
+                <label htmlFor="password">
+                  Password
+                </label>
+                <input type="password" name="password" id="password" required
+                  placeholder='Wachtwoord' value={form.password}
+                  onChange={handleChange} />
+              </div>
             </div>
-            <div className="input_container">
-              <label htmlFor="password">
-                Password
-              </label>
-              <input type="password" name="password" id="password" required
-                placeholder='Wachtwoord' value={form.password}
-                onChange={handleChange} />
-            </div>
-          </div>
 
-          <div>
-            <button type="submit" className='btn_shadow'>
-              <span>Inloggen</span>
-            </button>
-          </div>
-        </form>
-      </section>
-    </div>
+            <div>
+              <button type="submit" className='btn_shadow'>
+                <span>Inloggen</span>
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </>
   )
 }
 

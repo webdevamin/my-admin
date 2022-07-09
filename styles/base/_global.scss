@@ -31,3 +31,15 @@ button,
     @apply text-white;
   }
 }
+
+.heading_section {
+  @apply flex items-end justify-between mb-4;
+
+  h1 {
+    @apply mb-0;
+  }
+
+  span {
+    @apply font-medium text-sm pr-1;
+  }
+}
