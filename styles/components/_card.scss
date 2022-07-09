@@ -6,9 +6,15 @@
     @apply flex justify-center items-center gap-5;
 
     .circle {
-      @apply bg-dark text-white h-10 w-10 p-6 rounded-full 
+      @apply bg-dark h-10 w-10 p-6 rounded-full 
       flex items-center justify-center font-semibold 
-      shadow-xl text-2xl;
+      text-2xl text-dark;
+
+      box-shadow: 0px 20px 28px -10px;
+
+      span {
+        @apply text-white;
+      }
     }
   }
 
@@ -31,6 +37,9 @@
   }
 
   .delete_btn {
-    @apply cursor-pointer;
+    @apply cursor-pointer text-red bg-red 
+    transition hover:bg-opacity-80;
+
+    box-shadow: 0px 20px 30px -10px;
   }
 }

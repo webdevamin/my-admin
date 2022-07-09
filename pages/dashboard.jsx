@@ -52,7 +52,9 @@ const Dashboard = () => {
                                     return (
                                         <article className="card" key={id}>
                                             <div className="card_left">
-                                                <div className="circle">{units}</div>
+                                                <div className="circle">
+                                                    <span>{units}</span>
+                                                </div>
                                                 <div className="info">
                                                     <h2>{name}</h2>
                                                     <div className="flex items-center gap-2 mt-1">
@@ -75,7 +77,7 @@ const Dashboard = () => {
                                                 </div>
                                             </div>
                                             <FontAwesomeIcon icon="fa-solid fa-trash"
-                                                className="icon bg-red delete_btn" data-id={id} onClick={() => handleOpen(id)} />
+                                                className="icon delete_btn" data-id={id} onClick={() => handleOpen(id)} />
                                         </article>
                                     )
                                 })

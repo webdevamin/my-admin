@@ -10,5 +10,6 @@ button,
 
 .btn_shadow {
   box-shadow: 0px 20px 30px -10px;
+  
   @apply text-theme transition hover:bg-opacity-90;
 }

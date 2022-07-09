@@ -32,7 +32,6 @@ const DeleteModal = forwardRef(({ }, ref) => {
 
     useImperativeHandle(ref, () => ({
         handleOpen(id, shouldRedirect = false) {
-            console.log(id);
             setOpen(true);
             setItemId(id);
             if (shouldRedirect) setRedirect(true);
@@ -139,7 +138,7 @@ const DeleteModal = forwardRef(({ }, ref) => {
                                     className="mt-3 w-full inline-flex justify-center 
                                     rounded-md shadow-lg px-4 py-2 
                                     bg-theme text-base font-medium text-white
-                                     hover:bg-gray-50 focus:outline-none focus:ring-2 
+                                     hover:bg-dark focus:outline-none focus:ring-2 
                                      focus:ring-offset-2 focus:ring-indigo-500 
                                      sm:ml-3 sm:w-auto sm:text-sm h-fit"
                                     onClick={() => setOpen(false)}
