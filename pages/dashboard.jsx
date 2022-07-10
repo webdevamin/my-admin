@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState, useRef } from "react";
 import Header from "../components/Header";
 import app from "../config/firebase";
-import { collection, getFirestore, onSnapshot } from "firebase/firestore";
+import { collection, getFirestore, onSnapshot, orderBy, query } from "firebase/firestore";
 import DeleteModal from "../components/DeleteModal";
 import Loader from "../components/Loader";
 import Seo from "../components/Seo";
@@ -21,7 +21,9 @@ const Dashboard = () => {
     const noNotificationPermissionModalCompRef = useRef();
 
     useEffect(() => {
-        const unsub = onSnapshot(collection(db, "reservations"), (snapshot) => {
+        const q = query(collection(db, "reservations"), orderBy("time_submitted", "desc"));
+
+        const unsub = onSnapshot(q, (snapshot) => {
             setReservations(
                 snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -46,14 +48,17 @@ const Dashboard = () => {
                 setDoesAcceptNotifsPermission(true);
             }
 
-            else setDoesAcceptNotifsPermission(false);
+            else {
+                console.log('Notification permission blocked.');
+                setDoesAcceptNotifsPermission(false);
+            }
         })
     }, [])
 
     useEffect(() => {
         setTimeout(() => {
             const disablePermissionModal = localStorage.getItem('disable_permission_modal');
-            
+
             if (!doesAcceptNotifsPermission && !disablePermissionModal) {
                 noNotificationPermissionModalCompRef.current.handleOpen();
             }
