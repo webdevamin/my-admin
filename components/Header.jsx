@@ -46,10 +46,10 @@ const Header = () => {
         });
 
         if (disableBtn) {
-            toast('Reservaties uitgeschakeld');
+            toast('Reserveringen uitgeschakeld');
         }
         else {
-            toast('Reservaties ingeschakeld');
+            toast('Reserveringen ingeschakeld');
         }
 
         setRenderDisableReservationsBtn(disable);

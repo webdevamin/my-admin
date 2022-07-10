@@ -7,14 +7,18 @@ import DeleteModal from "../components/DeleteModal";
 import Loader from "../components/Loader";
 import Seo from "../components/Seo";
 import ReservationInfoModal from "../components/ReservationInfoModal";
+import { getMessaging } from "firebase/messaging";
+import NoNotificationPermissionModal from "../components/NoNotificationPermissionModal";
 
 const Dashboard = () => {
     const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [doesAcceptNotifsPermission, setDoesAcceptNotifsPermission] = useState(true);
     const db = getFirestore(app);
 
     const deleteModalCompRef = useRef();
     const reservationInfoModalCompRef = useRef();
+    const noNotificationPermissionModalCompRef = useRef();
 
     useEffect(() => {
         const unsub = onSnapshot(collection(db, "reservations"), (snapshot) => {
@@ -33,6 +37,29 @@ const Dashboard = () => {
         };
     }, [db]);
 
+    useEffect(() => {
+        const messaging = getMessaging(app);
+
+        Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted.');
+                setDoesAcceptNotifsPermission(true);
+            }
+
+            else setDoesAcceptNotifsPermission(false);
+        })
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+            const disablePermissionModal = localStorage.getItem('disable_permission_modal');
+            
+            if (!doesAcceptNotifsPermission && !disablePermissionModal) {
+                noNotificationPermissionModalCompRef.current.handleOpen();
+            }
+        }, 2000)
+    }, [doesAcceptNotifsPermission])
+
     const handleOpen = (id) => {
         deleteModalCompRef.current.handleOpen(id);
     };
@@ -48,6 +75,7 @@ const Dashboard = () => {
             <Seo title={'Dashboard'} description={'Dashboard'} />
             <DeleteModal ref={deleteModalCompRef} />
             <ReservationInfoModal ref={reservationInfoModalCompRef} />
+            <NoNotificationPermissionModal ref={noNotificationPermissionModalCompRef} />
             <Header />
             <main>
                 <section className="heading_section">

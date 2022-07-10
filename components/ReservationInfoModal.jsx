@@ -177,7 +177,7 @@ const ReservationInfoModal = forwardRef(({ }, ref) => {
                                     transition-all"
                                     onClick={() => setOpen(false)}
                                 >
-                                    Begrepen!
+                                    Begrepen
                                 </button>
                             </div>
                         </div>
