@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState, useRef } from "react";
 import Header from "../components/Header";
-import app from "../config/firebase";
+import { app, messaging } from "../config/firebase";
 import { collection, getFirestore, onSnapshot, orderBy, query } from "firebase/firestore";
 import DeleteModal from "../components/DeleteModal";
 import Loader from "../components/Loader";
 import Seo from "../components/Seo";
 import ReservationInfoModal from "../components/ReservationInfoModal";
-import { getMessaging } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import NoNotificationPermissionModal from "../components/NoNotificationPermissionModal";
 
 const Dashboard = () => {
@@ -40,19 +40,30 @@ const Dashboard = () => {
     }, [db]);
 
     useEffect(() => {
-        const messaging = getMessaging(app);
-
         Notification.requestPermission().then((permission) => {
             if (permission === 'granted') {
-                console.log('Notification permission granted.');
+                const messaging = getMessaging();
                 setDoesAcceptNotifsPermission(true);
+                navigator.serviceWorker.getRegistration('/sw.js').then((swRegistration) => {
+                    getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FB_WPUSH_CERT, serviceWorkerRegistration: swRegistration })
+                        .then((currentToken) => {
+                            if (currentToken) {
+                                console.log(currentToken);
+                            } else {
+                                // Show permission request UI
+                                console.log('No registration token available. Request permission to generate one.');
+                                // ...
+                            }
+                        }).catch((err) => {
+                            console.log('An error occurred while retrieving token. ', err);
+                        });
+                });
             }
-
             else {
                 console.log('Notification permission blocked.');
                 setDoesAcceptNotifsPermission(false);
             }
-        })
+        });
     }, [])
 
     useEffect(() => {
@@ -73,6 +84,11 @@ const Dashboard = () => {
         reservationInfoModalCompRef.current.handleOpen();
     }
 
+    const handleMsg = () => {
+        // fetch('https://b73c-87-66-180-140.eu.ngrok.io/dashboard')
+        // .then((res)=>)
+    }
+
     if (loading) return <Loader />
 
     return (
@@ -85,7 +101,8 @@ const Dashboard = () => {
             <main>
                 <section className="heading_section">
                     <h1>Reserveringen</h1>
-                    <span onClick={handleOpenGuide} className={'cursor-pointer'}>
+                    {/* <span onClick={handleOpenGuide} className={'cursor-pointer'}> */}
+                    <span onClick={handleMsg} className={'cursor-pointer'}>
                         Help
                     </span>
                 </section>

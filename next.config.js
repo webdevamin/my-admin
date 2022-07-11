@@ -5,7 +5,9 @@ const prod = process.env.NODE_ENV === 'production'
 const nextConfig = withPWA({
   reactStrictMode: true,
   pwa: {
-    disable: prod ? false : true,
+    // disable: prod ? false : true,
+    // disable: true,
+    disable: false,
     dest: "public",
   },
 });
