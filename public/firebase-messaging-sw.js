@@ -1,20 +1,27 @@
-import { initializeApp } from "firebase/app";
-import { getMessaging } from "firebase/messaging/sw";
+importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js');
 
-// Initialize the Firebase app in the service worker by passing in
-// your app's Firebase config object.
-// https://firebase.google.com/docs/web/setup#config-object
+// Replace the values with yours
 const config = {
-  //   databaseURL: "https://project-id.firebaseio.com",
-  apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FB_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FB_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FB_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FB_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FB_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FB_MEASUREMENT_ID,
+  apiKey: "AIzaSyAsaG_zLDk78zWXzvujpgbM6rK2CsyVCJw",
+  authDomain: "my-admin-e3edb.firebaseapp.com",
+  projectId: "my-admin-e3edb",
+  storageBucket: "my-admin-e3edb.appspot.com",
+  messagingSenderId: "3945505613",
+  appId: "1:3945505613:web:ce5df1c96923582670cd04",
 };
 
-// Retrieve an instance of Firebase Messaging so that it can handle background
-// messages.
-const messaging = getMessaging(initializeApp(config));
+firebase.initializeApp(config);
+
+const messaging = firebase.messaging();
+
+messaging.onBackgroundMessage(function (payload) {
+  console.log("Received background message ", payload);
+
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});
