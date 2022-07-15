@@ -67,7 +67,7 @@ const Home = () => {
                   <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation"
                     className='error_icon' />
                   <p className="error_text" role="alert">
-                    Onjuiste e-mailadres/wachtwoord
+                    Onjuist e-mailadres/wachtwoord
                   </p>
                 </div>
               )

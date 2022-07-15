@@ -2,13 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState, useRef } from "react";
 import Header from "../components/Header";
 import { app } from "../config/firebase";
-import { collection, getFirestore, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+    collection, getFirestore, onSnapshot,
+    orderBy, query, doc, setDoc, getDoc, updateDoc
+} from "firebase/firestore";
 import DeleteModal from "../components/DeleteModal";
 import Loader from "../components/Loader";
 import Seo from "../components/Seo";
 import ReservationInfoModal from "../components/ReservationInfoModal";
 import { getMessaging, getToken } from "firebase/messaging";
 import NoNotificationPermissionModal from "../components/NoNotificationPermissionModal";
+import { v4 as uuidv4 } from 'uuid';
 
 const Dashboard = () => {
     const [reservations, setReservations] = useState([]);
@@ -40,6 +44,59 @@ const Dashboard = () => {
     }, [db]);
 
     useEffect(() => {
+        const saveToken = async (uuid, currentToken) => {
+            try {
+                await setDoc(doc(db, "fcm_tokens", uuid), {
+                    uuid: uuid,
+                    token_id: currentToken
+                });
+
+                localStorage.setItem('fcm_token', JSON.stringify({
+                    uuid: uuid,
+                    token_id: currentToken
+                }));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        const syncTokens = async (localToken, currentToken) => {
+            const { uuid, token_id: tokenIdClient } = localToken;
+            const docRef = doc(db, "fcm_tokens", uuid);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const { token_id: tokenIdDb } = docSnap.data();
+
+                if (currentToken !== tokenIdDb) {
+                    try {
+                        await updateDoc(docRef, {
+                            uuid: uuid,
+                            token_id: currentToken
+                        });
+
+                        localStorage.removeItem("fcm_token");
+                        localStorage.setItem('fcm_token', JSON.stringify({
+                            uuid: uuid,
+                            token_id: currentToken
+                        }));
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+            }
+            else {
+                try {
+                    await setDoc(doc(db, "fcm_tokens", uuid), {
+                        uuid: uuid,
+                        token_id: currentToken
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+
         Notification.requestPermission().then((permission) => {
             if (permission === 'granted') {
                 const messaging = getMessaging();
@@ -48,7 +105,10 @@ const Dashboard = () => {
                 getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FB_WPUSH_CERT })
                     .then((currentToken) => {
                         if (currentToken) {
-                            console.log(currentToken);
+                            const localToken = JSON.parse(localStorage.getItem('fcm_token'));
+
+                            if (!localToken) saveToken(uuidv4(), currentToken);
+                            else syncTokens(localToken, currentToken);
                         } else {
                             console.log('No registration token available. Request permission to generate one.');
                         }
@@ -61,7 +121,7 @@ const Dashboard = () => {
                 setDoesAcceptNotifsPermission(false);
             }
         });
-    }, [])
+    }, [db])
 
     useEffect(() => {
         setTimeout(() => {
