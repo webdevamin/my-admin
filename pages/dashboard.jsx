@@ -61,7 +61,7 @@ const Dashboard = () => {
         }
 
         const syncTokens = async (localToken, currentToken) => {
-            const { uuid, token_id: tokenIdClient } = localToken;
+            const { uuid } = localToken;
             const docRef = doc(db, "fcm_tokens", uuid);
             const docSnap = await getDoc(docRef);
 
