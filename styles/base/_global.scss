@@ -13,6 +13,10 @@ label {
   display: none;
 }
 
+strong {
+  @apply font-semibold;
+}
+
 .input_container {
   @apply w-full mb-4;
 }
@@ -33,7 +37,7 @@ button,
 }
 
 .heading_section {
-  @apply flex items-end justify-between mb-4;
+  @apply flex items-end justify-between mb-5;
 
   h1 {
     @apply mb-0;
@@ -42,4 +46,8 @@ button,
   span {
     @apply font-medium text-sm pr-1;
   }
+}
+
+.items {
+  @apply flex flex-col gap-3;
 }

@@ -1,0 +1,18 @@
+.item {
+  @apply flex items-center border border-theme 
+  border-opacity-50 rounded-xl p-5;
+
+  .item_icon {
+    @apply pr-3;
+  }
+
+  .item_content {
+    .item_heading {
+      @apply flex items-center;
+    }
+
+    p {
+      @apply text-sm mt-1.5;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import toast, { Toaster } from 'react-hot-toast';
+import Link from "next/link";
 
 const Header = () => {
     const router = useRouter();
@@ -66,8 +67,12 @@ const Header = () => {
                     className={`cursor-pointer ${renderDisableReservationsBtn ? 'hidden' : 'block'}`}
                     size="xl" onClick={() => handleReservationClick(false)} />
             </div>
-            <FontAwesomeIcon icon="fa-solid fa-power-off" size="xl"
-                onClick={handleClick} className="cursor-pointer" />
+            <Link href={'/settings'}>
+                <a className="pl-6">
+                    <FontAwesomeIcon icon="fa-solid fa-screwdriver-wrench" size="xl"
+                        className="cursor-pointer" />
+                </a>
+            </Link>
             <Toaster toastOptions={
                 {
                     className: 'bg-light text-dark font-semibold',

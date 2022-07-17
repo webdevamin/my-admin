@@ -4,15 +4,17 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faTrash, faTriangleExclamation,
-  faPowerOff, faUserGroup, faClock,
-  faUtensils, faPhone, faBell, faBellSlash
+  faPowerOff, faClock,
+  faUtensils, faPhone, faBell, faBellSlash,
+  faScrewdriverWrench, faDatabase
 } from '@fortawesome/free-solid-svg-icons';
 import "../styles/app.scss";
 
 config.autoAddCss = false;
 
 library.add(faTrash, faTriangleExclamation, faPowerOff,
-  faUserGroup, faClock, faUtensils, faPhone, faBell, faBellSlash);
+  faClock, faUtensils, faPhone, faBell,
+  faBellSlash, faScrewdriverWrench, faDatabase);
 
 const MyApp = ({ Component, pageProps }) => {
   return (
