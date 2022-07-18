@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from 'react';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { APP_NAME } from "../config/app";
 import app from "../config/firebase";
 import Cookies from 'js-cookie';
@@ -103,7 +102,7 @@ export async function getServerSideProps(context) {
   const { fb_admin_uid } = context.req.cookies;
   const isTokenValid = fb_admin_uid === process.env.FB_ADMIN_UID;
 
-  if (isTokenValid) {
+  if (isTokenValid && process.env.FB_ADMIN_UID) {
     return {
       redirect: {
         permanent: false,
