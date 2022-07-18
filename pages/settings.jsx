@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import app from "../config/firebase";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
-import { doc, deleteDoc, getFirestore } from "firebase/firestore";
+import { doc as docToDo, deleteDoc, getFirestore, collection, getDocs } from "firebase/firestore";
 import Alert from "../components/Alert";
 import { useState } from "react";
 
@@ -25,8 +25,15 @@ const Settings = () => {
 
     const removeFcmTokens = async () => {
         try {
-            await deleteDoc(doc(db, "fcm_tokens"));
-            logout();
+            const querySnapshot = await getDocs(collection(db, "fcm_tokens"));
+            let countTokens = querySnapshot.size;
+
+            querySnapshot.forEach(async (doc) => {
+                await deleteDoc(docToDo(db, "fcm_tokens", doc.id));
+                countTokens--;
+
+                if (countTokens === 0) logout();
+            });
         } catch (error) {
             console.log(error);
             setError(error.toString());
@@ -53,7 +60,7 @@ const Settings = () => {
                             <p>
                                 Het is belangrijk om deze <strong>wekelijks</strong> uit te
                                 voeren wanneer u en uw collega&apos;s gedaan
-                                zijn met werken. Nadat u op deze knop klikt, wordt u uitgelogd.
+                                zijn met werken. Nadat u op deze knop klikt, wordt u afgemeld.
                             </p>
                         </div>
                     </article>
