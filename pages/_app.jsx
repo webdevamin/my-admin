@@ -4,7 +4,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faTrash, faTriangleExclamation,
-  faPowerOff, faClock,
+  faPowerOff, faClock, faCircleCheck,
   faUtensils, faPhone, faBell, faBellSlash,
   faScrewdriverWrench, faDatabase
 } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,7 @@ import "../styles/app.scss";
 config.autoAddCss = false;
 
 library.add(faTrash, faTriangleExclamation, faPowerOff,
-  faClock, faUtensils, faPhone, faBell,
+  faClock, faUtensils, faPhone, faBell, faCircleCheck,
   faBellSlash, faScrewdriverWrench, faDatabase);
 
 const MyApp = ({ Component, pageProps }) => {

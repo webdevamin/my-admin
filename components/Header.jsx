@@ -1,16 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter } from "next/router";
-import { getAuth } from "firebase/auth";
 import app from "../config/firebase";
-import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import toast, { Toaster } from 'react-hot-toast';
 import Link from "next/link";
 
 const Header = () => {
-    const router = useRouter();
-    const auth = getAuth(app);
     const db = getFirestore(app);
 
     const [loading, setLoading] = useState(true);
@@ -30,12 +25,6 @@ const Header = () => {
 
         fetchData();
     }, [db])
-
-    const handleClick = () => {
-        Cookies.remove('fb_admin_uid');
-        auth.signOut();
-        router.replace('/');
-    }
 
     const handleReservationClick = async (disableBtn) => {
         const docRef = doc(db, "disable_reservations", "I1YLivWVqQhsDqR9a7rd");

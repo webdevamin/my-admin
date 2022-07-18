@@ -6,6 +6,7 @@ import { APP_NAME } from "../config/app";
 import app from "../config/firebase";
 import Cookies from 'js-cookie';
 import Seo from "../components/Seo";
+import Alert from "../components/Alert";
 
 const initForm = {
   email: '', password: ''
@@ -53,7 +54,7 @@ const Home = () => {
 
   return (
     <>
-      <Seo title={'Welkom'} description={'Welkom terug op My Admin. Login om verder te gaan.'}/>
+      <Seo title={'Welkom'} description={'Welkom terug op My Admin. Login om verder te gaan.'} />
       <div className='mt-20'>
         <section className='intro'>
           <h1 className="text-3xl mb-5">Welkom terug</h1>
@@ -61,17 +62,10 @@ const Home = () => {
         </section>
         <section>
           <form onSubmit={handleSubmit}>
-            {
-              error && (
-                <div className='error'>
-                  <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation"
-                    className='error_icon' />
-                  <p className="error_text" role="alert">
-                    Onjuist e-mailadres/wachtwoord
-                  </p>
-                </div>
-              )
-            }
+            {error && <Alert
+              description={'Onjuist e-mailadres/wachtwoord'}
+              classname={'error'}
+            />}
             <div>
               <div className="input_container">
                 <label htmlFor="email">

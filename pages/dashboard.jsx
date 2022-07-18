@@ -13,6 +13,7 @@ import ReservationInfoModal from "../components/ReservationInfoModal";
 import { getMessaging, getToken } from "firebase/messaging";
 import NoNotificationPermissionModal from "../components/NoNotificationPermissionModal";
 import { v4 as uuidv4 } from 'uuid';
+import Alert from "../components/Alert";
 
 const Dashboard = () => {
     const [reservations, setReservations] = useState([]);
@@ -201,22 +202,14 @@ const Dashboard = () => {
                         </section>
                     )
                 }
-                {
-                    reservations.length < 1 && (
-                        <div className='warning'>
-                            <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation"
-                                className='warning_icon' />
-                            <p className="warning_text" role="alert">
-                                Er zijn momenteel geen reserveringen.
-                            </p>
-                        </div>
-                    )
-                }
+                {reservations.length < 1 && (
+                    <Alert classname={'warning'}
+                        description={'Er zijn momenteel geen reserveringen beschikbaar'} />
+                )}
             </main>
         </>
     )
 }
-
 
 export default Dashboard;
 

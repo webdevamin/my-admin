@@ -1,6 +1,7 @@
 .item {
   @apply flex items-center border border-theme 
-  border-opacity-50 rounded-xl p-5;
+  border-opacity-50 rounded-xl p-5 cursor-pointer
+  transition-all hover:bg-theme hover:bg-opacity-25;
 
   .item_icon {
     @apply pr-3;
