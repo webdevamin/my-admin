@@ -102,7 +102,7 @@ export async function getServerSideProps(context) {
   const { fb_admin_uid } = context.req.cookies;
   const isTokenValid = fb_admin_uid === process.env.FB_ADMIN_UID;
 
-  if (isTokenValid && process.env.FB_ADMIN_UID) {
+  if (isTokenValid) {
     return {
       redirect: {
         permanent: false,
