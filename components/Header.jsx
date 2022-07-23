@@ -29,7 +29,7 @@ const Header = () => {
     const handleReservationClick = async (disableBtn) => {
         const docRef = doc(db, "disable_reservations", "I1YLivWVqQhsDqR9a7rd");
         const docSnap = await getDoc(docRef);
-        const disable = docSnap.data().disable;
+        const disable = docSnap.data().disable ?? false;
 
         await updateDoc(docRef, {
             disable: !disable
@@ -47,14 +47,16 @@ const Header = () => {
 
     return (
         <header>
-            <div className={`${!loading && doesReservationSwitchExist ? 'block' : 'hidden'}`}>
-                <FontAwesomeIcon icon="fa-solid fa-bell"
-                    className={`cursor-pointer ${!renderDisableReservationsBtn ? 'hidden' : 'block'}`}
-                    size="xl" onClick={() => handleReservationClick(true)} />
+            <div>
+                <div className={`${!loading && doesReservationSwitchExist ? 'block' : 'hidden'}`}>
+                    <FontAwesomeIcon icon="fa-solid fa-bell"
+                        className={`cursor-pointer ${!renderDisableReservationsBtn ? 'hidden' : 'block'}`}
+                        size="xl" onClick={() => handleReservationClick(true)} />
 
-                <FontAwesomeIcon icon="fa-solid fa-bell-slash"
-                    className={`cursor-pointer ${renderDisableReservationsBtn ? 'hidden' : 'block'}`}
-                    size="xl" onClick={() => handleReservationClick(false)} />
+                    <FontAwesomeIcon icon="fa-solid fa-bell-slash"
+                        className={`cursor-pointer ${renderDisableReservationsBtn ? 'hidden' : 'block'}`}
+                        size="xl" onClick={() => handleReservationClick(false)} />
+                </div>
             </div>
             <Link href={'/settings'}>
                 <a className="pl-6">
