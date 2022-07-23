@@ -29,7 +29,7 @@ const Header = () => {
     const handleReservationClick = async (disableBtn) => {
         const docRef = doc(db, "disable_reservations", "I1YLivWVqQhsDqR9a7rd");
         const docSnap = await getDoc(docRef);
-        const disable = docSnap.data().disable ?? false;
+        const disable = docSnap.data().disable;
 
         await updateDoc(docRef, {
             disable: !disable
