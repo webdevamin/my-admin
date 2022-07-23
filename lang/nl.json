@@ -1,12 +1,12 @@
 {
   "noNotificationPermission": {
     "title": "Push berichten uitgeschakeld",
-    "body": "De push notifications functionaliteit zijn geblokkeerd of uitgeschakeld in de browser waarop deze app zich baseert. Zo kunt u in het achtergrond geen berichten ontvangen wanneer er nieuwe reserveringen binnenkomen. Noch is het mogelijk als u deze app sluit. U moet hiervoor de app altijd openlaten.\nOm deze functionaliteit te krijgen moet u push meldingen/notifications toelaten.",
+    "body": "De push berichten zijn hier geblokkeerd of uitgeschakeld. Zo kunt u in het achtergrond geen berichten ontvangen wanneer er nieuwe reserveringen binnenkomen. Noch is het mogelijk als u deze app sluit. U moet hiervoor de app altijd openlaten.\nOm deze functionaliteit te krijgen moet u push berichten toelaten.",
     "disableKey": "disable_permission_modal"
   },
   "noNotificationSupport": {
     "title": "Geen ondersteuning push berichten",
-    "body": "Uw browser en/of apparaat ondersteunt geen push berichten. Dit komt voor in iOS apparaten zoals iPhone, iPad, etc. Hierdoor moet u actief naar nieuwe reserveringen opletten.",
+    "body": "Uw browser en/of apparaat ondersteunt geen push berichten. Dit komt vooral voor in iOS apparaten zoals iPhone, iPad, etc. Hierdoor moet u actief alert zijn voor nieuwe reserveringen.",
     "disableKey": "disable_support_modal"
   },
   "clearReservationsReminder": {
