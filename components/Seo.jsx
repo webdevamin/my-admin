@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { APP_NAME } from "../config/app";
+import { APP_NAME, APP_THEME } from "../config/app";
 
 const Seo = ({ title, description }) => {
     return (
@@ -13,7 +13,7 @@ const Seo = ({ title, description }) => {
             <meta name="description" content={description ?? "Administratie app"} />
             <meta name="format-detection" content="telephone=no" />
             <meta name="mobile-web-app-capable" content="yes" />
-            <meta name="theme-color" content={process.env.NEXT_PUBLIC_APP_THEME} />
+            <meta name="theme-color" content={APP_THEME} />
             <link rel="apple-touch-icon" href="/android-chrome-192x192.png" />
             <link rel="manifest" href="/manifest.json" />
             <link
