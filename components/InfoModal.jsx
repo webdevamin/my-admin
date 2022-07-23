@@ -10,20 +10,22 @@ import {
 import { Dialog, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const NoNotificationPermissionModal = forwardRef(({ }, ref) => {
+const InfoModal = forwardRef(({ }, ref) => {
     const [open, setOpen] = useState(false);
+    const [lang, setLang] = useState(null);
 
     const cancelButtonRef = useRef(null);
     const destroyModal = () => setOpen(false);
 
     useImperativeHandle(ref, () => ({
-        handleOpen() {
+        handleOpen(lang) {
             setOpen(true);
+            setLang(lang);
         },
     }));
 
     const handleClick = (disableModal) => {
-        if (disableModal) localStorage.setItem('disable_permission_modal', '1');
+        if (disableModal) localStorage.setItem(lang.disableKey, '1');
 
         setOpen(false);
     }
@@ -83,19 +85,12 @@ const NoNotificationPermissionModal = forwardRef(({ }, ref) => {
                                                 as="h3"
                                                 className="text-lg leading-6 font-medium text-gray-900"
                                             >
-                                                Push berichten uitgeschakeld
+                                                {lang ? lang.title : 'Titel'}
                                             </Dialog.Title>
                                         </div>
                                         <div className="mt-4">
                                             <p className="text-sm text-gray-500 leading-6">
-                                                De push notifications functionaliteit zijn
-                                                geblokkeerd of uitgeschakeld in de browser waarop
-                                                deze app zich baseert. Zo kunt u in het achtergrond
-                                                geen berichten ontvangen wanneer er nieuwe
-                                                reserveringen binnenkomen. Noch is het
-                                                mogelijk als u deze app sluit. U moet hiervoor
-                                                de app altijd openlaten. Om deze functionaliteit te
-                                                krijgen moet u push meldingen/notifications toelaten.
+                                                {lang ? lang.body : 'Beschrijving'}
                                             </p>
                                         </div>
                                     </div>
@@ -137,4 +132,4 @@ const NoNotificationPermissionModal = forwardRef(({ }, ref) => {
     );
 });
 
-export default NoNotificationPermissionModal;
+export default InfoModal;

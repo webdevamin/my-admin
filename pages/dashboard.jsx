@@ -11,19 +11,32 @@ import Loader from "../components/Loader";
 import Seo from "../components/Seo";
 import ReservationInfoModal from "../components/ReservationInfoModal";
 import { getMessaging, getToken } from "firebase/messaging";
-import NoNotificationPermissionModal from "../components/NoNotificationPermissionModal";
 import { v4 as uuidv4 } from 'uuid';
 import Alert from "../components/Alert";
+import InfoModal from "../components/InfoModal";
+
+const lang = require('../lang/nl.json');
+
+const doesBrowserSupportNotificationAPI = () => {
+    return (
+        'Notification' in window &&
+        'serviceWorker' in navigator &&
+        'PushManager' in window
+    )
+}
 
 const Dashboard = () => {
     const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [doesAcceptNotifsPermission, setDoesAcceptNotifsPermission] = useState(true);
+    const [doesBrowserSupportNotifs, setDoesBrowserSupportNotifs] = useState(true);
+
     const db = getFirestore(app);
 
     const deleteModalCompRef = useRef();
     const reservationInfoModalCompRef = useRef();
-    const noNotificationPermissionModalCompRef = useRef();
+    const noNotificationPermissionCompRef = useRef();
+    const noNotificationSupportCompRef = useRef();
 
     useEffect(() => {
         const q = query(collection(db, "reservations"), orderBy("time_submitted", "desc"));
@@ -98,41 +111,56 @@ const Dashboard = () => {
             }
         }
 
-        Notification.requestPermission().then((permission) => {
-            if (permission === 'granted') {
-                const messaging = getMessaging();
-                setDoesAcceptNotifsPermission(true);
+        if (doesBrowserSupportNotificationAPI()) {
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    const messaging = getMessaging();
+                    setDoesAcceptNotifsPermission(true);
 
-                getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FB_WPUSH_CERT })
-                    .then((currentToken) => {
-                        if (currentToken) {
-                            const localToken = JSON.parse(localStorage.getItem('fcm_token'));
+                    getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FB_WPUSH_CERT })
+                        .then((currentToken) => {
+                            if (currentToken) {
+                                const localToken = JSON.parse(localStorage.getItem('fcm_token'));
 
-                            if (!localToken) saveToken(uuidv4(), currentToken);
-                            else syncTokens(localToken, currentToken);
-                        } else {
-                            console.log('No registration token available. Request permission to generate one.');
-                        }
-                    }).catch((err) => {
-                        console.log('An error occurred while retrieving token. ', err);
-                    });
-            }
-            else {
-                console.log('Notification permission blocked.');
-                setDoesAcceptNotifsPermission(false);
-            }
-        });
+                                if (!localToken) saveToken(uuidv4(), currentToken);
+                                else syncTokens(localToken, currentToken);
+                            } else {
+                                console.log('No registration token available. Request permission to generate one.');
+                            }
+                        }).catch((err) => {
+                            console.log('An error occurred while retrieving token. ', err);
+                        });
+                }
+                else {
+                    console.log('Notification permission blocked.');
+                    setDoesAcceptNotifsPermission(false);
+                }
+            });
+        }
+        else {
+            setDoesBrowserSupportNotifs(false);
+        }
     }, [db])
 
     useEffect(() => {
         setTimeout(() => {
-            const disablePermissionModal = localStorage.getItem('disable_permission_modal');
+            const disablePermissionModal = localStorage.getItem(lang.noNotificationPermission.disableKey);
 
             if (!doesAcceptNotifsPermission && !disablePermissionModal) {
-                noNotificationPermissionModalCompRef.current.handleOpen();
+                noNotificationPermissionCompRef.current.handleOpen(lang.noNotificationPermission);
+            }
+        }, 3000)
+    }, [doesAcceptNotifsPermission])
+
+    useEffect(() => {
+        setTimeout(() => {
+            const disableSupportModal = localStorage.getItem(lang.noNotificationSupport.disableKey);
+
+            if (!doesBrowserSupportNotifs && !disableSupportModal) {
+                noNotificationSupportCompRef.current.handleOpen(lang.noNotificationSupport);
             }
         }, 2000)
-    }, [doesAcceptNotifsPermission])
+    }, [doesBrowserSupportNotifs])
 
     const handleOpen = (id) => {
         deleteModalCompRef.current.handleOpen(id);
@@ -149,7 +177,8 @@ const Dashboard = () => {
             <Seo title={'Dashboard'} description={'Dashboard'} />
             <DeleteModal ref={deleteModalCompRef} />
             <ReservationInfoModal ref={reservationInfoModalCompRef} />
-            <NoNotificationPermissionModal ref={noNotificationPermissionModalCompRef} />
+            <InfoModal ref={noNotificationSupportCompRef} />
+            <InfoModal ref={noNotificationPermissionCompRef} />
             <Header />
             <main>
                 <section className="heading_section">
