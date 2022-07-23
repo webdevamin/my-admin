@@ -8,5 +8,10 @@
     "title": "Geen ondersteuning push berichten",
     "body": "Uw browser en/of apparaat ondersteunt geen push berichten. Dit komt voor in iOS apparaten zoals iPhone, iPad, etc. Hierdoor moet u actief naar nieuwe reserveringen opletten.",
     "disableKey": "disable_support_modal"
+  },
+  "clearReservationsReminder": {
+    "title": "Reserveringen verwijderen",
+    "body": "Er zijn al meer dan 5 reserveringen aanwezig. Gelieve de onnodige reserveringen te verwijderen. Het kan nadelige gevolgen hebben indien u dit niet doet.",
+    "disableKey": false
   }
 }

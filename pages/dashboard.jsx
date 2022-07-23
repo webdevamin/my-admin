@@ -37,6 +37,7 @@ const Dashboard = () => {
     const reservationInfoModalCompRef = useRef();
     const noNotificationPermissionCompRef = useRef();
     const noNotificationSupportCompRef = useRef();
+    const clearReservationsReminderCompRef = useRef();
 
     useEffect(() => {
         const q = query(collection(db, "reservations"), orderBy("time_submitted", "desc"));
@@ -162,6 +163,12 @@ const Dashboard = () => {
         }, 2000)
     }, [doesBrowserSupportNotifs])
 
+    useEffect(() => {
+        if (reservations.length > 5) {
+            clearReservationsReminderCompRef.current.handleOpen(lang.clearReservationsReminder);
+        }
+    }, [reservations])
+
     const handleOpen = (id) => {
         deleteModalCompRef.current.handleOpen(id);
     };
@@ -179,6 +186,7 @@ const Dashboard = () => {
             <ReservationInfoModal ref={reservationInfoModalCompRef} />
             <InfoModal ref={noNotificationSupportCompRef} />
             <InfoModal ref={noNotificationPermissionCompRef} />
+            <InfoModal ref={clearReservationsReminderCompRef} />
             <Header />
             <main>
                 <section className="heading_section">
