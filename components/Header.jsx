@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import app from "../config/firebase";
+import config from "../config/firebase";
 import { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import toast, { Toaster } from 'react-hot-toast';
 import Link from "next/link";
+import { initializeApp } from "firebase/app";
 
 const Header = () => {
+    const app = initializeApp(config);
     const db = getFirestore(app);
 
     const [loading, setLoading] = useState(true);

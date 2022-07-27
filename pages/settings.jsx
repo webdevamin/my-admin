@@ -3,19 +3,22 @@ import Header from "../components/Header";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from 'js-cookie';
-import app from "../config/firebase";
+import config from "../config/firebase";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import { doc as docToDo, deleteDoc, getFirestore, collection, getDocs } from "firebase/firestore";
 import Alert from "../components/Alert";
 import { useState } from "react";
+import { initializeApp } from "firebase/app";
 
 const Settings = () => {
     const [error, setError] = useState('');
 
+    const app = initializeApp(config);
     const auth = getAuth(app);
-    const router = useRouter();
     const db = getFirestore(app);
+
+    const router = useRouter();
 
     const logout = () => {
         Cookies.remove('fb_admin_uid');

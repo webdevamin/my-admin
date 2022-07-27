@@ -11,7 +11,7 @@ const config = {
   measurementId: process.env.NEXT_PUBLIC_FB_MEASUREMENT_ID,
 };
 
-const app = initializeApp(config);
+// const app = initializeApp(config);
 // const analytics = getAnalytics(app);
 
-export default app;
+export default config;

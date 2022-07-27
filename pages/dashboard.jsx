@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState, useRef } from "react";
 import Header from "../components/Header";
-import { app } from "../config/firebase";
+import config from "../config/firebase";
 import {
     collection, getFirestore, onSnapshot,
     orderBy, query, doc, setDoc, getDoc, updateDoc
@@ -14,6 +14,7 @@ import { getMessaging, getToken } from "firebase/messaging";
 import { v4 as uuidv4 } from 'uuid';
 import Alert from "../components/Alert";
 import InfoModal from "../components/InfoModal";
+import { initializeApp } from "firebase/app";
 
 const lang = require('../lang/nl.json');
 
@@ -25,13 +26,14 @@ const doesBrowserSupportNotificationAPI = () => {
     )
 }
 
+const app = initializeApp(config);
+const db = getFirestore(app);
+
 const Dashboard = () => {
     const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [doesAcceptNotifsPermission, setDoesAcceptNotifsPermission] = useState(true);
     const [doesBrowserSupportNotifs, setDoesBrowserSupportNotifs] = useState(true);
-
-    const db = getFirestore(app);
 
     const deleteModalCompRef = useRef();
     const reservationInfoModalCompRef = useRef();
@@ -56,7 +58,7 @@ const Dashboard = () => {
         return () => {
             unsub();
         };
-    }, [db]);
+    }, []);
 
     useEffect(() => {
         const saveToken = async (uuid, currentToken) => {
@@ -115,7 +117,7 @@ const Dashboard = () => {
         if (doesBrowserSupportNotificationAPI()) {
             Notification.requestPermission().then((permission) => {
                 if (permission === 'granted') {
-                    const messaging = getMessaging();
+                    const messaging = getMessaging(app);
                     setDoesAcceptNotifsPermission(true);
 
                     getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FB_WPUSH_CERT })

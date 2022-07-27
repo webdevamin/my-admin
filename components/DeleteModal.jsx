@@ -10,10 +10,13 @@ import {
 import { Dialog, Transition } from "@headlessui/react";
 import { doc, deleteDoc, getFirestore } from "firebase/firestore";
 import { useRouter } from "next/router";
-import app from "../config/firebase";
+import config from "../config/firebase";
+import { initializeApp } from "firebase/app";
 
 const DeleteModal = forwardRef(({ }, ref) => {
+    const app = initializeApp(config);
     const db = getFirestore(app);
+    
     const router = useRouter();
 
     const [open, setOpen] = useState(false);

@@ -2,10 +2,11 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from 'react';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { APP_NAME } from "../config/app";
-import app from "../config/firebase";
+import config from "../config/firebase";
 import Cookies from 'js-cookie';
 import Seo from "../components/Seo";
 import Alert from "../components/Alert";
+import { initializeApp } from "firebase/app";
 
 const initForm = {
   email: '', password: ''
@@ -13,8 +14,11 @@ const initForm = {
 
 const Home = () => {
   const router = useRouter();
+
   const [form, setForm] = useState(initForm);
   const [error, setError] = useState(false);
+
+  const app = initializeApp(config);
   const auth = getAuth(app);
 
   const handleSubmit = (e) => {
