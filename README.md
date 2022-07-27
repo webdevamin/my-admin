@@ -1,4 +1,4 @@
-# MyAdmin
+# My Admin
 
 A bootstrapped admin application.
 
