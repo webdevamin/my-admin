@@ -143,7 +143,7 @@ const Dashboard = () => {
         else {
             setDoesBrowserSupportNotifs(false);
         }
-    }, [db])
+    }, [])
 
     useEffect(() => {
         setTimeout(() => {
