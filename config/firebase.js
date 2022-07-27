@@ -1,6 +1,3 @@
-import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-
 const config = {
   apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FB_AUTH_DOMAIN,
@@ -10,8 +7,5 @@ const config = {
   appId: process.env.NEXT_PUBLIC_FB_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FB_MEASUREMENT_ID,
 };
-
-// const app = initializeApp(config);
-// const analytics = getAnalytics(app);
 
 export default config;
