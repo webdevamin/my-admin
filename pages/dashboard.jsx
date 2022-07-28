@@ -15,6 +15,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Alert from "../components/Alert";
 import InfoModal from "../components/InfoModal";
 import { initializeApp } from "firebase/app";
+import { MAX_ITEMS } from "../config/app";
+import { interpolate } from "../config/helpers";
 
 const lang = require('../lang/nl.json');
 
@@ -39,7 +41,6 @@ const Dashboard = () => {
     const reservationInfoModalCompRef = useRef();
     const noNotificationPermissionCompRef = useRef();
     const noNotificationSupportCompRef = useRef();
-    const clearReservationsReminderCompRef = useRef();
 
     useEffect(() => {
         const q = query(collection(db, "reservations"), orderBy("time_submitted", "desc"));
@@ -165,12 +166,6 @@ const Dashboard = () => {
         }, 2000)
     }, [doesBrowserSupportNotifs])
 
-    useEffect(() => {
-        if (reservations.length > 5) {
-            clearReservationsReminderCompRef.current.handleOpen(lang.clearReservationsReminder);
-        }
-    }, [reservations])
-
     const handleOpen = (id) => {
         deleteModalCompRef.current.handleOpen(id);
     };
@@ -188,7 +183,6 @@ const Dashboard = () => {
             <ReservationInfoModal ref={reservationInfoModalCompRef} />
             <InfoModal ref={noNotificationSupportCompRef} />
             <InfoModal ref={noNotificationPermissionCompRef} />
-            <InfoModal ref={clearReservationsReminderCompRef} />
             <Header />
             <main>
                 <section className="heading_section">
@@ -197,6 +191,20 @@ const Dashboard = () => {
                         Help
                     </span>
                 </section>
+                {
+                    reservations.length > MAX_ITEMS && (
+                        <Alert
+                            description={
+                                interpolate(
+                                    lang.clearReservationsReminder.body,
+                                    { max_items: MAX_ITEMS }
+                                )
+                            }
+                            classname={'error'}
+                            extraClasses={'text-sm leading-6'}
+                        />
+                    )
+                }
                 {
                     reservations.length >= 1 && (
                         <section>
