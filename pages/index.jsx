@@ -67,7 +67,7 @@ const Home = () => {
           <form onSubmit={handleSubmit}>
             {error && <Alert
               description={'Onjuist e-mailadres/wachtwoord'}
-              classname={'error'}
+              iconClass={'error'}
             />}
             <div>
               <div className="input_container">

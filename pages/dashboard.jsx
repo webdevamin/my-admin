@@ -43,7 +43,7 @@ const Dashboard = () => {
     const noNotificationSupportCompRef = useRef();
 
     useEffect(() => {
-        const q = query(collection(db, "reservations"), orderBy("time_submitted", "desc"));
+        const q = query(collection(db, "reservations"), orderBy("date_submitted", "desc"));
 
         const unsub = onSnapshot(q, (snapshot) => {
             setReservations(
@@ -200,8 +200,7 @@ const Dashboard = () => {
                                     { max_items: MAX_ITEMS }
                                 )
                             }
-                            classname={'error'}
-                            extraClasses={'text-sm leading-6'}
+                            iconClass={'error'}
                         />
                     )
                 }
@@ -250,7 +249,7 @@ const Dashboard = () => {
                     )
                 }
                 {reservations.length < 1 && (
-                    <Alert classname={'warning'}
+                    <Alert iconClass={'error'} classes={'mt-10'}
                         description={'Er zijn momenteel geen reserveringen beschikbaar'} />
                 )}
             </main>

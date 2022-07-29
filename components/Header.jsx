@@ -72,7 +72,7 @@ const Header = () => {
                 </div>
             </div>
             <FontAwesomeIcon icon="fa-solid fa-power-off"
-                className="item_icon" size="xl" onClick={logout} />
+                className="item_icon cursor-pointer" size="xl" onClick={logout} />
             <Toaster toastOptions={
                 {
                     className: 'bg-light text-dark font-semibold',

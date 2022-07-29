@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Alert = ({ description, classname }) => {
+const Alert = ({ description, iconClass, classes }) => {
     let icon;
 
-    switch (classname) {
+    switch (iconClass) {
         case 'error':
             icon = 'fa-triangle-exclamation';
             break;
@@ -14,7 +14,7 @@ const Alert = ({ description, classname }) => {
     }
 
     return (
-        <div className={`alert ${classname}`}>
+        <div className={`alert ${iconClass} ${classes}`}>
             <FontAwesomeIcon icon={`fa-solid ${icon}`}
                 className={`alert_icon`} />
             <p className={`alert_text`} role="alert">
