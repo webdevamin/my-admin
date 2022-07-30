@@ -204,8 +204,8 @@ const Dashboard = () => {
                                 className="bg-theme p-0 -mt-2 bg-transparent 
                                 text-sm w-auto block">
                                 <span className="text-red opacity-100 
-                                font-medium underline underline-offset-8
-                                pb-1 hover:no-underline hover:opacity-80">
+                                font-medium border-b border-b-red
+                                pb-1 hover:border-0">
                                     Verwijder alle reserveringen
                                 </span>
                             </button>
