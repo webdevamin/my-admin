@@ -235,7 +235,7 @@ const Dashboard = () => {
                                 {
                                     reservations.map((reservation) => {
                                         const { id, data } = reservation;
-                                        const { name, phone, reservation_time, time_submitted, units } = data;
+                                        const { name, phone, reservation_time, date_submitted, units } = data;
 
                                         return (
                                             <article className="card" key={id}>
@@ -254,7 +254,7 @@ const Dashboard = () => {
                                                             <div>
                                                                 <FontAwesomeIcon icon="fa-solid fa-clock"
                                                                     className="text-xs" />
-                                                                <span>{time_submitted}</span>
+                                                                <span>{date_submitted.split(" ")[1]}</span>
                                                             </div>
                                                             <div>
                                                                 <FontAwesomeIcon icon="fa-solid fa-utensils"
