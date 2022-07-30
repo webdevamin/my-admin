@@ -40,7 +40,7 @@ const DeleteModal = forwardRef(({ }, ref) => {
     const remove = async () => {
         try {
             if (itemId) {
-                await deleteDoc(doc(db, "reservations", itemId));
+                await deleteDoc(docTodo(db, "reservations", itemId));
             }
             else {
                 const querySnapshot = await getDocs(collection(db, "reservations"));
