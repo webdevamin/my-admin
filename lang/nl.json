@@ -11,7 +11,15 @@
   },
   "clearReservationsReminder": {
     "title": "Reserveringen verwijderen",
-    "body": "Er zijn al meer dan {max_items} reserveringen aanwezig. Gelieve de onnodige reserveringen te verwijderen. Het kan financiële gevolgen hebben indien u dit niet doet.",
+    "body": "Er zijn al meer dan {max_items} reserveringen aanwezig. Gelieve de onnodige reserveringen te verwijderen. Het kan financiële gevolgen hebben indien u deze actie niet onderneemt.",
     "disableKey": false
+  },
+  "deleteReservation": {
+    "title": "Bevestiging",
+    "body": "Indien u deze reservering verwijdert, zal het uit de lijst met reserveringen gewist worden. Wilt u het zeker verwijderen?"
+  },
+  "deleteReservations": {
+    "title": "Bevestiging",
+    "body": "Alle reserveringen zullen uit de lijst gewist worden. Wilt u ze zeker verwijderen?"
   }
 }

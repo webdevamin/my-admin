@@ -9,12 +9,20 @@ body {
   @apply bg-white;
 }
 
+main {
+  @apply relative;
+}
+
 label {
   display: none;
 }
 
 strong {
   @apply font-semibold;
+}
+
+.container_w {
+  @apply w-10/12 lg:w-10/12 mx-auto max-w-xl;
 }
 
 .input_container {

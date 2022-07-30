@@ -38,6 +38,7 @@ const Dashboard = () => {
     const [doesBrowserSupportNotifs, setDoesBrowserSupportNotifs] = useState(true);
 
     const deleteModalCompRef = useRef();
+    const deleteAllModalCompRef = useRef();
     const reservationInfoModalCompRef = useRef();
     const noNotificationPermissionCompRef = useRef();
     const noNotificationSupportCompRef = useRef();
@@ -167,7 +168,11 @@ const Dashboard = () => {
     }, [doesBrowserSupportNotifs])
 
     const handleOpen = (id) => {
-        deleteModalCompRef.current.handleOpen(id);
+        deleteModalCompRef.current.handleOpen(id, lang.deleteReservation);
+    };
+
+    const handleOpenDeleteAll = () => {
+        deleteAllModalCompRef.current.handleOpen(null, lang.deleteReservations);
     };
 
     const handleOpenGuide = () => {
@@ -180,6 +185,7 @@ const Dashboard = () => {
         <>
             <Seo title={'Dashboard'} description={'Dashboard'} />
             <DeleteModal ref={deleteModalCompRef} />
+            <DeleteModal ref={deleteAllModalCompRef} />
             <ReservationInfoModal ref={reservationInfoModalCompRef} />
             <InfoModal ref={noNotificationSupportCompRef} />
             <InfoModal ref={noNotificationPermissionCompRef} />
@@ -192,60 +198,88 @@ const Dashboard = () => {
                     </span>
                 </section>
                 {
+                    reservations.length >= 1 && (
+                        <section className="mb-9">
+                            <button onClick={handleOpenDeleteAll}
+                                className="bg-theme p-0 -mt-2 bg-transparent 
+                                text-sm w-auto block">
+                                <span className="text-red opacity-100 
+                                font-medium border-b border-red 
+                                pb-1 hover:border-0">
+                                    Verwijder alle reserveringen
+                                </span>
+                            </button>
+                        </section>
+                    )
+                }
+                {
                     reservations.length > MAX_ITEMS && (
-                        <Alert
-                            description={
-                                interpolate(
-                                    lang.clearReservationsReminder.body,
-                                    { max_items: MAX_ITEMS }
-                                )
-                            }
-                            iconClass={'error'}
-                        />
+                        <>
+                            <Alert
+                                description={
+                                    interpolate(
+                                        lang.clearReservationsReminder.body,
+                                        { max_items: MAX_ITEMS }
+                                    )
+                                }
+                                iconClass={'error'}
+                                classes={'mb-5'}
+                            />
+                        </>
                     )
                 }
                 {
                     reservations.length >= 1 && (
-                        <section>
-                            {
-                                reservations.map((reservation) => {
-                                    const { id, data } = reservation;
-                                    const { name, phone, reservation_time, time_submitted, units } = data;
+                        <>
+                            <section>
+                                {
+                                    reservations.map((reservation) => {
+                                        const { id, data } = reservation;
+                                        const { name, phone, reservation_time, time_submitted, units } = data;
 
-                                    return (
-                                        <article className="card" key={id}>
-                                            <div className="card_left">
-                                                <div className="circle">
-                                                    <span>{units}</span>
-                                                </div>
-                                                <div className="info">
-                                                    <h2>{name}</h2>
-                                                    <div className="flex items-center gap-2 mt-1">
-                                                        <FontAwesomeIcon icon="fa-solid fa-phone"
-                                                            className="text-xs" />
-                                                        <a href={`tel:${phone}`}>{phone}</a>
+                                        return (
+                                            <article className="card" key={id}>
+                                                <div className="card_left">
+                                                    <div className="circle">
+                                                        <span>{units}</span>
                                                     </div>
-                                                    <div className="info_bottom">
-                                                        <div>
-                                                            <FontAwesomeIcon icon="fa-solid fa-clock"
+                                                    <div className="info">
+                                                        <h2>{name}</h2>
+                                                        <div className="flex items-center gap-2 mt-1">
+                                                            <FontAwesomeIcon icon="fa-solid fa-phone"
                                                                 className="text-xs" />
-                                                            <span>{time_submitted}</span>
+                                                            <a href={`tel:${phone}`}>{phone}</a>
                                                         </div>
-                                                        <div>
-                                                            <FontAwesomeIcon icon="fa-solid fa-utensils"
-                                                                className="text-xs" />
-                                                            <span>{reservation_time}</span>
+                                                        <div className="info_bottom">
+                                                            <div>
+                                                                <FontAwesomeIcon icon="fa-solid fa-clock"
+                                                                    className="text-xs" />
+                                                                <span>{time_submitted}</span>
+                                                            </div>
+                                                            <div>
+                                                                <FontAwesomeIcon icon="fa-solid fa-utensils"
+                                                                    className="text-xs" />
+                                                                <span>{reservation_time}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <FontAwesomeIcon icon="fa-solid fa-trash"
-                                                className="icon delete_btn" data-id={id} onClick={() => handleOpen(id)} />
-                                        </article>
-                                    )
-                                })
-                            }
-                        </section>
+                                                <FontAwesomeIcon icon="fa-solid fa-trash"
+                                                    className="icon delete_btn" data-id={id} onClick={() => handleOpen(id)} />
+                                            </article>
+                                        )
+                                    })
+                                }
+                            </section>
+                            {/* <section className="fixed left-0 right-0 
+                             bottom-10 container_w">
+                                <button className="button_red shadow-xl">
+                                    <span>
+                                        Verwijder alle reserveringen
+                                    </span>
+                                </button>
+                            </section> */}
+                        </>
                     )
                 }
                 {reservations.length < 1 && (
