@@ -7,6 +7,8 @@ import Cookies from 'js-cookie';
 import Seo from "../components/Seo";
 import Alert from "../components/Alert";
 import { initializeApp } from "firebase/app";
+import Lottie from "lottie-react";
+import admin from "/public/admin.json";
 
 const initForm = {
   email: '', password: ''
@@ -58,43 +60,43 @@ const Home = () => {
   return (
     <>
       <Seo title={'Welkom'} description={'Welkom terug op My Admin. Login om verder te gaan.'} />
-      <div className='mt-20'>
-        <section className='intro'>
-          <h1 className="text-3xl mb-5">Welkom terug</h1>
-          <p>Welkom terug op {APP_NAME}! Login met uw gegevens om door te gaan.</p>
-        </section>
-        <section>
-          <form onSubmit={handleSubmit}>
-            {error && <Alert
-              description={'Onjuist e-mailadres/wachtwoord'}
-              iconClass={'error'}
-            />}
-            <div>
-              <div className="input_container">
-                <label htmlFor="email">
-                  Email address
-                </label>
-                <input type="email" name="email" id="email" required
-                  placeholder='E-mailadres' value={form.email}
-                  onChange={handleChange} />
+      <div className='mt-4'>
+        <div>
+          <Lottie animationData={admin} loop={true} />
+        </div>
+        <div className="mt-10">
+          <section>
+            <form onSubmit={handleSubmit}>
+              {error && <Alert
+                description={'Onjuist e-mailadres/wachtwoord'}
+                iconClass={'error'}
+              />}
+              <div>
+                <div className="input_container">
+                  <label htmlFor="email">
+                    Email address
+                  </label>
+                  <input type="email" name="email" id="email" required
+                    placeholder='E-mailadres' value={form.email}
+                    onChange={handleChange} />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="password">
+                    Password
+                  </label>
+                  <input type="password" name="password" id="password" required
+                    placeholder='Wachtwoord' value={form.password}
+                    onChange={handleChange} />
+                </div>
               </div>
-              <div className="input_container">
-                <label htmlFor="password">
-                  Password
-                </label>
-                <input type="password" name="password" id="password" required
-                  placeholder='Wachtwoord' value={form.password}
-                  onChange={handleChange} />
+              <div>
+                <button type="submit" className='btn_shadow'>
+                  <span>Inloggen</span>
+                </button>
               </div>
-            </div>
-
-            <div>
-              <button type="submit" className='btn_shadow'>
-                <span>Inloggen</span>
-              </button>
-            </div>
-          </form>
-        </section>
+            </form>
+          </section>
+        </div>
       </div>
     </>
   )

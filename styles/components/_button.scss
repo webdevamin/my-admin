@@ -16,6 +16,22 @@ button,
   }
 }
 
+.button_white {
+  @apply bg-white text-white font-bold mt-5;
+
+  span {
+    @apply text-theme opacity-100;
+  }
+}
+
+.button_dark {
+  @apply bg-dark text-white font-bold mt-5;
+
+  span {
+    @apply text-white opacity-100;
+  }
+}
+
 .button_red_linear {
   @apply bg-gradient-to-b to-red from-red_light text-white font-bold mt-5;
 
@@ -28,6 +44,18 @@ button,
   box-shadow: 0px 20px 30px -10px;
 
   @apply text-theme transition hover:bg-opacity-90;
+}
+
+.btn_shadow_white {
+  box-shadow: 0px 20px 30px -10px;
+
+  @apply text-white transition hover:bg-opacity-90;
+}
+
+.btn_shadow_dark {
+  box-shadow: 0px 20px 30px -10px;
+
+  @apply text-dark transition hover:bg-opacity-90;
 }
 
 .btn_shadow_red {
