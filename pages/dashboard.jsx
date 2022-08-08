@@ -17,6 +17,7 @@ import InfoModal from "../components/InfoModal";
 import { initializeApp } from "firebase/app";
 import { MAX_ITEMS } from "../config/app";
 import { interpolate } from "../config/helpers";
+import Sidebar from "../components/Sidebar";
 
 const lang = require('../lang/nl.json');
 
@@ -190,6 +191,7 @@ const Dashboard = () => {
             <InfoModal ref={noNotificationSupportCompRef} />
             <InfoModal ref={noNotificationPermissionCompRef} />
             <Header />
+            <Sidebar />
             <main>
                 <section className="heading_section">
                     <h1>Reserveringen</h1>
