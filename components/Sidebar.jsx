@@ -39,6 +39,23 @@ const Sidebar = ({ show, toggleMenu }) => {
                     </div>
                     <ul className={`mt-12`}>
                         <li className={`pb-2.5 mb-2.5`}>
+                            <Link href={'/dashboard'}>
+                                <a className={`flex items-center gap-5 transition-all 
+                            ease-in-out`}>
+                                    <div className="bg-cyan-500 box_shadow
+                                text-cyan-500 transition-all ease-in-out 
+                                hover:opacity-75 w-10 h-10 flex items-center 
+                                justify-center rounded-xl">
+                                        <FontAwesomeIcon icon={`fa-solid fa-home`}
+                                            className={`alert_icon text-white-all`} />
+                                    </div>
+                                    <span className={`font-semibold opacity-75`}>
+                                        Dashboard
+                                    </span>
+                                </a>
+                            </Link>
+                        </li>
+                        <li className={`pb-2.5 mb-2.5`}>
                             <Link href={'/#'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
