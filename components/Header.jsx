@@ -4,17 +4,11 @@ import { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import toast, { Toaster } from 'react-hot-toast';
 import { initializeApp } from "firebase/app";
-import { useRouter } from "next/router";
-import Cookies from 'js-cookie';
-import { getAuth } from "firebase/auth";
 
 const app = initializeApp(config);
 const db = getFirestore(app);
-const auth = getAuth(app);
 
 const Header = () => {
-    const router = useRouter();
-
     const [loading, setLoading] = useState(true);
     const [renderDisableReservationsBtn, setRenderDisableReservationsBtn] = useState(true);
     const [doesReservationSwitchExist, setDoesReservationSwitchExist] = useState(true);
@@ -32,12 +26,6 @@ const Header = () => {
 
         fetchData();
     }, [])
-
-    const logout = () => {
-        Cookies.remove('fb_admin_uid');
-        auth.signOut();
-        router.replace('/');
-    }
 
     const handleReservationClick = async (disableBtn) => {
         const docRef = doc(db, "disable_reservations", "I1YLivWVqQhsDqR9a7rd");
@@ -71,8 +59,8 @@ const Header = () => {
                         size="xl" onClick={() => handleReservationClick(false)} />
                 </div>
             </div>
-            <FontAwesomeIcon icon="fa-solid fa-power-off"
-                className="item_icon cursor-pointer" size="xl" onClick={logout} />
+            <FontAwesomeIcon icon="fa-solid fa-bars"
+                className="item_icon cursor-pointer" size="xl" />
             <Toaster toastOptions={
                 {
                     className: 'bg-light text-dark font-semibold',

@@ -22,7 +22,7 @@ strong {
 }
 
 .container_w {
-  @apply w-10/12 lg:w-10/12 mx-auto max-w-xl;
+  @apply w-10/12 lg:w-10/12 mx-auto max-w-xl relative;
 }
 
 .input_container {

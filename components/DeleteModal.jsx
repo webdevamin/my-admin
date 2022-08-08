@@ -8,7 +8,10 @@ import {
     useImperativeHandle,
 } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { doc as docTodo, deleteDoc, getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+    doc as docTodo, deleteDoc,
+    getFirestore, collection, getDocs
+} from "firebase/firestore";
 import config from "../config/firebase";
 import { initializeApp } from "firebase/app";
 
