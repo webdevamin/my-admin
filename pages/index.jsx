@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from 'react';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { APP_NAME } from "../config/app";
 import config from "../config/firebase";
 import Cookies from 'js-cookie';
 import Seo from "../components/Seo";
@@ -49,9 +48,7 @@ const Home = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        if (!Cookies.get('fb_admin_uid')) {
-          Cookies.set('fb_admin_uid', user.uid);
-        }
+        Cookies.set('fb_admin_uid', user.uid);
         router.push('/dashboard');
       }
     });
