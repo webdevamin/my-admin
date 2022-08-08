@@ -37,7 +37,7 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [doesAcceptNotifsPermission, setDoesAcceptNotifsPermission] = useState(true);
     const [doesBrowserSupportNotifs, setDoesBrowserSupportNotifs] = useState(true);
-
+    const [showMenu, setShowMenu] = useState(false);
     const deleteModalCompRef = useRef();
     const deleteAllModalCompRef = useRef();
     const reservationInfoModalCompRef = useRef();
@@ -180,6 +180,10 @@ const Dashboard = () => {
         reservationInfoModalCompRef.current.handleOpen();
     }
 
+    const toggleMenu = (toggle) => {
+        setShowMenu(toggle);
+    }
+
     if (loading) return <Loader />
 
     return (
@@ -190,8 +194,8 @@ const Dashboard = () => {
             <ReservationInfoModal ref={reservationInfoModalCompRef} />
             <InfoModal ref={noNotificationSupportCompRef} />
             <InfoModal ref={noNotificationPermissionCompRef} />
-            <Header />
-            <Sidebar />
+            <Header toggleMenu={toggleMenu} showMenu={showMenu} />
+            <Sidebar show={showMenu} toggleMenu={toggleMenu} />
             <main>
                 <section className="heading_section">
                     <h1>Reserveringen</h1>
