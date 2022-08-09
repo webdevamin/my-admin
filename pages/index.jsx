@@ -58,10 +58,16 @@ const Home = () => {
     <>
       <Seo title={'Welkom'} description={'Welkom terug op My Admin. Login om verder te gaan.'} />
       <div className='mt-4'>
-        <div>
+        <div className="w-9/12 mx-auto">
           <Lottie animationData={admin} loop={true} />
         </div>
-        <div className="mt-10">
+        <div className="mt-8">
+          <section className="mb-7 text-center">
+            <h1 className="mb-2">
+              Welkom op My Admin
+            </h1>
+            <p>Login om verder te gaan</p>
+          </section>
           <section>
             <form onSubmit={handleSubmit}>
               {error && <Alert
