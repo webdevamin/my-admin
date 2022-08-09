@@ -57,8 +57,8 @@ const Home = () => {
   return (
     <>
       <Seo title={'Welkom'} description={'Welkom terug op My Admin. Login om verder te gaan.'} />
-      <div className='mt-4'>
-        <div className="w-9/12 mx-auto">
+      <div className='h-screen -my-8 flex flex-col justify-center'>
+        <div className="w-10/12 mx-auto">
           <Lottie animationData={admin} loop={true} />
         </div>
         <div className="mt-8">
