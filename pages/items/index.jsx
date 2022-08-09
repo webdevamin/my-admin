@@ -59,9 +59,6 @@ const Index = () => {
             <main>
                 <section className="heading_section">
                     <h1>Items</h1>
-                    <span onClick={handleOpenGuide} className={'cursor-pointer'}>
-                        Help
-                    </span>
                 </section>
                 {
                     items.length >= 1 && (
@@ -72,23 +69,24 @@ const Index = () => {
                                         const { title, description, price, image_url } = item;
 
                                         return (
-                                            <article className="card gap-3" key={index}>
+                                            <article className="card bg-emerald-100 gap-3" key={index}>
                                                 <div className="card_left">
-                                                    <div className="circle">
+                                                    <div className="circle circle_lg">
                                                         <span>{1}</span>
                                                     </div>
                                                     <div className="info">
                                                         <h2>{title}</h2>
                                                         <div className="flex items-center gap-2 mt-1">
-                                                            <span>{description}</span>
+                                                            <span className="font-medium">{description}</span>
                                                         </div>
-                                                        <div className="font-semibold mt-2 text-emerald-600">
+                                                        <div className="font-bold mt-2 text-emerald-700">
                                                             {price}
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <FontAwesomeIcon icon="fa-solid fa-trash"
-                                                    className="icon delete_btn" data-id={index} />
+                                                <FontAwesomeIcon icon="fa-solid fa-angle-right"
+                                                    className="icon more_btn bg-emerald-500 text-emerald-500"
+                                                    data-id={index} />
                                             </article>
                                         )
                                     })

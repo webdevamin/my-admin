@@ -42,8 +42,8 @@ const Sidebar = ({ show, toggleMenu }) => {
                             <Link href={'/dashboard'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
-                                    <div className="bg-cyan-500 box_shadow
-                                text-cyan-500 transition-all ease-in-out 
+                                    <div className="bg-theme box_shadow
+                                text-theme transition-all ease-in-out 
                                 hover:opacity-75 w-10 h-10 flex items-center 
                                 justify-center rounded-xl">
                                         <FontAwesomeIcon icon={`fa-solid fa-home`}
@@ -76,8 +76,8 @@ const Sidebar = ({ show, toggleMenu }) => {
                             <Link href={'/items'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
-                                    <div className="bg-theme box_shadow
-                                text-theme transition-all ease-in-out hover:opacity-75
+                                    <div className="bg-emerald-500 box_shadow
+                                text-emerald-500 transition-all ease-in-out hover:opacity-75
                                 w-10 h-10 flex items-center justify-center rounded-xl">
                                         <FontAwesomeIcon icon={`fa-solid fa-shirt`}
                                             className={`alert_icon text-white-all`} />
@@ -92,8 +92,8 @@ const Sidebar = ({ show, toggleMenu }) => {
                             <Link href={'/#'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
-                                    <div className="bg-emerald-500 box_shadow
-                                text-emerald-500 transition-all ease-in-out 
+                                    <div className="bg-cyan-500 box_shadow
+                                text-cyan-500 transition-all ease-in-out 
                                 hover:opacity-75 w-10 h-10 flex items-center 
                                 justify-center rounded-xl">
                                         <FontAwesomeIcon icon={`fa-solid fa-screwdriver-wrench`}

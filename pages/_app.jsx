@@ -7,7 +7,7 @@ import {
   faPowerOff, faClock, faCircleCheck,
   faUtensils, faPhone, faBell, faBellSlash,
   faScrewdriverWrench, faDatabase, faXmark, faShirt,
-  faBookmark, faBars, faHome
+  faBookmark, faBars, faHome, faAngleRight
 } from '@fortawesome/free-solid-svg-icons';
 import "../styles/app.scss";
 
@@ -16,7 +16,7 @@ config.autoAddCss = false;
 library.add(faTrash, faTriangleExclamation, faPowerOff,
   faClock, faUtensils, faPhone, faBell, faCircleCheck,
   faBellSlash, faScrewdriverWrench, faDatabase, faXmark,
-  faShirt, faBookmark, faBars, faHome);
+  faShirt, faBookmark, faBars, faHome, faAngleRight);
 
 const MyApp = ({ Component, pageProps }) => {
   return (
