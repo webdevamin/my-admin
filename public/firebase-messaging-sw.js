@@ -18,6 +18,7 @@ messaging.onBackgroundMessage(function (payload) {
   const notificationTitle = title;
   const notificationOptions = {
     body: body,
+    icon: '/android-chrome-192x192.png'
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
