@@ -38,12 +38,12 @@ const Dashboard = () => {
     const [doesAcceptNotifsPermission, setDoesAcceptNotifsPermission] = useState(true);
     const [doesBrowserSupportNotifs, setDoesBrowserSupportNotifs] = useState(true);
     const [showMenu, setShowMenu] = useState(false);
+    const [error, setError] = useState(false);
     const deleteModalCompRef = useRef();
     const deleteAllModalCompRef = useRef();
     const reservationInfoModalCompRef = useRef();
     const noNotificationPermissionCompRef = useRef();
     const noNotificationSupportCompRef = useRef();
-
     useEffect(() => {
         const q = query(collection(db, "reservations"), orderBy("date_submitted", "desc"));
 
@@ -56,6 +56,9 @@ const Dashboard = () => {
             );
 
             setLoading(false);
+        }, (error) => {
+            setLoading(false);
+            setError(error.message);
         });
 
         return () => {
@@ -186,6 +189,19 @@ const Dashboard = () => {
 
     if (loading) return <Loader />
 
+    if (error) return (
+        <>
+            <Seo title={'Dashboard'} description={'Dashboard'} />
+            <Header toggleMenu={toggleMenu} showMenu={showMenu} />
+            <Sidebar show={showMenu} toggleMenu={toggleMenu} />
+            <Alert
+                description={error}
+                iconClass={'error'}
+                classes={'mb-5'}
+            />
+        </>
+    )
+
     return (
         <>
             <Seo title={'Dashboard'} description={'Dashboard'} />
@@ -277,14 +293,6 @@ const Dashboard = () => {
                                     })
                                 }
                             </section>
-                            {/* <section className="fixed left-0 right-0 
-                             bottom-10 container_w">
-                                <button className="button_red shadow-xl">
-                                    <span>
-                                        Verwijder alle reserveringen
-                                    </span>
-                                </button>
-                            </section> */}
                         </>
                     )
                 }
