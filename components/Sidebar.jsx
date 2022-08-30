@@ -89,7 +89,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                             </Link>
                         </li>
                         <li className={`pb-2.5 mb-2.5`}>
-                            <Link href={'/#'}>
+                            <Link href={'/settings'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
                                     <div className="bg-cyan-500 box_shadow

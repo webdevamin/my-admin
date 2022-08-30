@@ -213,7 +213,7 @@ const Dashboard = () => {
             <Header toggleMenu={toggleMenu} showMenu={showMenu} />
             <Sidebar show={showMenu} toggleMenu={toggleMenu} />
             <main>
-                <section className="heading_section">
+                <section className="heading_section mb-5">
                     <h1>Reserveringen</h1>
                     <span onClick={handleOpenGuide} className={'cursor-pointer'}>
                         Help

@@ -1,23 +1,18 @@
 import ReservationInfoModal from "../../components/ReservationInfoModal";
 import { useEffect, useState, useRef } from "react";
 import Seo from "../../components/Seo";
-import Header from "../../components/Header";
-import Sidebar from "../../components/Sidebar";
-import {
-    collection, getFirestore, onSnapshot,
-    orderBy, query, doc, setDoc, getDocs, updateDoc
-} from "firebase/firestore";
+import { collection, getFirestore, getDocs } from "firebase/firestore";
 import config from "../../config/firebase";
 import { initializeApp } from "firebase/app";
 import Loader from "../../components/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Top } from "../../components/Top";
 
 const app = initializeApp(config);
 const db = getFirestore(app);
 
 const Index = () => {
     const [items, setItems] = useState([]);
-    const [showMenu, setShowMenu] = useState(false);
     const [loading, setLoading] = useState(true);
 
     const reservationInfoModalCompRef = useRef();
@@ -40,59 +35,48 @@ const Index = () => {
         })
     }, []);
 
-    const handleOpenGuide = () => {
-        reservationInfoModalCompRef.current.handleOpen();
-    }
-
-    const toggleMenu = (toggle) => {
-        setShowMenu(toggle);
-    }
-
     if (loading) return <Loader />
 
     return (
         <>
             <Seo title={'Items'} description={'Lijst met items.'} />
             <ReservationInfoModal ref={reservationInfoModalCompRef} />
-            <Header toggleMenu={toggleMenu} showMenu={showMenu} />
-            <Sidebar show={showMenu} toggleMenu={toggleMenu} />
+            <Top />
             <main>
                 <section className="heading_section">
                     <h1>Items</h1>
                 </section>
                 {
                     items.length >= 1 && (
-                        <>
-                            <section>
-                                {
-                                    items.map((item, index) => {
-                                        const { title, description, price, image_url } = item;
+                        <section>
+                            {
+                                items.map((item, index) => {
+                                    const { title, description, price, image_url } = item;
 
-                                        return (
-                                            <article className="card bg-emerald-100 gap-3" key={index}>
-                                                <div className="card_left">
-                                                    <div className="circle circle_lg">
-                                                        <span>{1}</span>
+                                    return (
+                                        <article className="card bg-emerald-100 gap-3" key={index}>
+                                            <div className="card_left">
+                                                <div className="circle circle_lg">
+                                                    <span>{1}</span>
+                                                </div>
+                                                <div className="info">
+                                                    <h2>{title}</h2>
+                                                    <div className="flex items-center gap-2 mt-1">
+                                                        <span className="font-medium">{description}</span>
                                                     </div>
-                                                    <div className="info">
-                                                        <h2>{title}</h2>
-                                                        <div className="flex items-center gap-2 mt-1">
-                                                            <span className="font-medium">{description}</span>
-                                                        </div>
-                                                        <div className="font-bold mt-2 text-emerald-700">
-                                                            {price}
-                                                        </div>
+                                                    <div className="font-bold mt-2 text-emerald-700">
+                                                        {price}
                                                     </div>
                                                 </div>
-                                                <FontAwesomeIcon icon="fa-solid fa-angle-right"
-                                                    className="icon more_btn bg-emerald-500 text-emerald-500"
-                                                    data-id={index} />
-                                            </article>
-                                        )
-                                    })
-                                }
-                            </section>
-                        </>
+                                            </div>
+                                            <FontAwesomeIcon icon="fa-solid fa-angle-right"
+                                                className="icon more_btn bg-emerald-500 text-emerald-500"
+                                                data-id={index} />
+                                        </article>
+                                    )
+                                })
+                            }
+                        </section>
                     )
                 }
             </main>
