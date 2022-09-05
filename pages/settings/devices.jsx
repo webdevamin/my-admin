@@ -1,7 +1,7 @@
 import Seo from "../../components/Seo"
-import { Top } from "../../components/Top"
+import { Top } from "../../components/Layout/Top"
 import { useRef } from "react";
-import ReservationInfoModal from "../../components/ReservationInfoModal";
+import ReservationInfoModal from "../../components/Modals/ReservationInfoModal";
 
 const Devices = () => {
     const reservationInfoModalCompRef = useRef();

@@ -1,23 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState, useRef } from "react";
-import Header from "../components/Header";
+import Header from "../components/Layout/Header";
 import config from "../config/firebase";
 import {
     collection, getFirestore, onSnapshot,
     orderBy, query, doc, setDoc, getDoc, updateDoc
 } from "firebase/firestore";
-import DeleteModal from "../components/DeleteModal";
+import DeleteModal from "../components/Modals/DeleteModal";
 import Loader from "../components/Loader";
 import Seo from "../components/Seo";
-import ReservationInfoModal from "../components/ReservationInfoModal";
+import ReservationInfoModal from "../components/Modals/ReservationInfoModal";
 import { getMessaging, getToken } from "firebase/messaging";
 import { v4 as uuidv4 } from 'uuid';
 import Alert from "../components/Alert";
-import InfoModal from "../components/InfoModal";
+import InfoModal from "../components/Modals/InfoModal";
 import { initializeApp } from "firebase/app";
 import { MAX_ITEMS } from "../config/app";
 import { interpolate } from "../config/helpers";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Layout/Sidebar";
 
 const lang = require('../lang/nl.json');
 

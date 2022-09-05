@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import config from "../config/firebase";
+import config from "../../config/firebase";
 import Cookies from 'js-cookie';
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";

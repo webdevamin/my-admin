@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import config from "../config/firebase";
+import config from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import toast, { Toaster } from 'react-hot-toast';

@@ -1,7 +1,6 @@
+import LinkItem from "../../components/LinkItem";
 import Seo from "../../components/Seo";
-import { Top } from "../../components/Top";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
+import { Top } from "../../components/Layout/Top";
 
 const Settings = () => {
     return (
@@ -13,12 +12,9 @@ const Settings = () => {
                     <h1>Instellingen</h1>
                 </section>
                 <section>
-                    <Link href={'/settings/devices'}>
-                        <a className="link_item">
-                            <FontAwesomeIcon icon="fa-solid fa-display" size="xl" />
-                            <span>Ingelogde apparaten</span>
-                        </a>
-                    </Link>
+                    <LinkItem title={`Ingelogde apparaten`}
+                        href={`/settings/devices`}
+                        iconClasses={`fa-solid fa-display`} />
                 </section>
             </main>
         </>

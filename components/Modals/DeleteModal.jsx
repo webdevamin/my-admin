@@ -12,7 +12,7 @@ import {
     doc as docTodo, deleteDoc,
     getFirestore, collection, getDocs
 } from "firebase/firestore";
-import config from "../config/firebase";
+import config from "../../config/firebase";
 import { initializeApp } from "firebase/app";
 
 const DeleteModal = forwardRef(({ }, ref) => {

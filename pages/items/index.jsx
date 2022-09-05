@@ -1,4 +1,4 @@
-import ReservationInfoModal from "../../components/ReservationInfoModal";
+import ReservationInfoModal from "../../components/Modals/ReservationInfoModal";
 import { useEffect, useState, useRef } from "react";
 import Seo from "../../components/Seo";
 import { collection, getFirestore, getDocs } from "firebase/firestore";
@@ -6,7 +6,7 @@ import config from "../../config/firebase";
 import { initializeApp } from "firebase/app";
 import Loader from "../../components/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Top } from "../../components/Top";
+import { Top } from "../../components/Layout/Top";
 
 const app = initializeApp(config);
 const db = getFirestore(app);
