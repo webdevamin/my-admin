@@ -59,3 +59,27 @@ button,
 .items {
   @apply flex flex-col gap-3;
 }
+
+.error_icon {
+  @apply text-rose-800;
+
+  * {
+    @apply text-rose-800;
+  }
+}
+
+.warning_icon {
+  @apply text-amber-700;
+
+  * {
+    @apply text-amber-700;
+  }
+}
+
+.success_icon {
+  @apply text-emerald-600;
+
+  * {
+    @apply text-emerald-600;
+  }
+}
