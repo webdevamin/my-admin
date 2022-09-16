@@ -5,8 +5,8 @@ import { collection, getFirestore, getDocs } from "firebase/firestore";
 import config from "../../config/firebase";
 import { initializeApp } from "firebase/app";
 import Loader from "../../components/Loader";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Top } from "../../components/Layout/Top";
+import CardTwo from "../../components/Cards/CardTwo";
 
 const app = initializeApp(config);
 const db = getFirestore(app);
@@ -51,28 +51,8 @@ const Index = () => {
                         <section>
                             {
                                 items.map((item, index) => {
-                                    const { title, description, price, image_url } = item;
-
                                     return (
-                                        <article className="card bg-emerald-100 gap-3" key={index}>
-                                            <div className="card_left">
-                                                <div className="circle circle_lg">
-                                                    <span>{1}</span>
-                                                </div>
-                                                <div className="info">
-                                                    <h2>{title}</h2>
-                                                    <div className="flex items-center gap-2 mt-1">
-                                                        <span className="font-medium">{description}</span>
-                                                    </div>
-                                                    <div className="font-bold mt-2 text-emerald-700">
-                                                        {price}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <FontAwesomeIcon icon="fa-solid fa-angle-right"
-                                                className="icon more_btn bg-emerald-500 text-emerald-500"
-                                                data-id={index} />
-                                        </article>
+                                        <CardTwo key={index} item={item} />
                                     )
                                 })
                             }

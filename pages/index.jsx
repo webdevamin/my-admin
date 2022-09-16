@@ -4,10 +4,10 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebas
 import config from "../config/firebase";
 import Cookies from 'js-cookie';
 import Seo from "../components/Seo";
-import Alert from "../components/Alert";
 import { initializeApp } from "firebase/app";
 import Lottie from "lottie-react";
 import admin from "/public/admin.json";
+import AlertError from "../components/AlertError";
 
 const initForm = {
   email: '', password: ''
@@ -70,10 +70,9 @@ const Home = () => {
           </section>
           <section>
             <form onSubmit={handleSubmit}>
-              {error && <Alert
-                description={'Onjuist e-mailadres/wachtwoord'}
-                iconClass={'error'}
-              />}
+              {error && (
+                <AlertError description={`Onjuist e-mailadres/wachtwoord`} />
+              )}
               <div>
                 <div className="input_container">
                   <label htmlFor="email">

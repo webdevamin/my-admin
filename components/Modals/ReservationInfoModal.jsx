@@ -68,22 +68,25 @@ const ReservationInfoModal = forwardRef(({ }, ref) => {
                         sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div className="sm:flex sm:items-start">
-                                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <Dialog.Title
-                                            as="h3"
-                                            className="text-lg leading-6 font-medium text-gray-900"
-                                        >
+                                    <div className="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
+                                        <Dialog.Title as="h3" className="text-xl leading-6 
+                                        font-medium text-gray-900 text-center">
                                             Gebruik
                                         </Dialog.Title>
                                         <div className="mt-3">
-                                            <p className="text-sm text-gray-500">
+                                            <p className="text-sm text-gray-500 mb-8">
                                                 Dit is uw dashboard: een overzicht met reservaties.
                                                 Onderaan wordt uitgelegd wat de verschillende delen van een reservatie betekenen.
                                             </p>
-                                            <article className="card mt-5">
-                                                <div className="card_left">
-                                                    <div className="circle">
-                                                        <span>3</span>
+                                            <article className={`bg-light rounded-2xl flex 
+                                            justify-between p-4 mb-3 shadow-sm items-center`}>
+                                                <div className={`flex justify-center items-center gap-5`}>
+                                                    <div className={`bg-dark h-10 w-10 p-6 rounded-full 
+                                                    flex items-center justify-center font-semibold 
+                                                    text-2xl text-dark box_shadow`}>
+                                                        <span className={`text-white`}>
+                                                            3
+                                                        </span>
                                                     </div>
                                                     <div className="info">
                                                         <h2 className="text-left">Kevin Boo</h2>
@@ -92,22 +95,28 @@ const ReservationInfoModal = forwardRef(({ }, ref) => {
                                                                 className="text-xs" />
                                                             <span>0470542112</span>
                                                         </div>
-                                                        <div className="info_bottom">
-                                                            <div>
+                                                        <div className={`flex gap-8 mt-2 pt-2 border-t
+                                                        border-t-theme border-opacity-20`}>
+                                                            <div className={`flex items-center gap-2`}>
                                                                 <FontAwesomeIcon icon="fa-solid fa-clock"
-                                                                    className="text-xs" />
-                                                                <span>00:02:45</span>
+                                                                    className={`text-sm`} />
+                                                                <span className={`text-sm font-bold`}>
+                                                                    00:02:45
+                                                                </span>
                                                             </div>
-                                                            <div>
+                                                            <div className={`flex items-center gap-2`}>
                                                                 <FontAwesomeIcon icon="fa-solid fa-utensils"
                                                                     className="text-xs" />
-                                                                <span>12:30</span>
+                                                                <span className={`text-sm font-bold`}>
+                                                                    12:30
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <FontAwesomeIcon icon="fa-solid fa-trash"
-                                                    className="icon delete_btn" />
+                                                    className={`icon cursor-pointer text-red bg-red 
+                                                    transition hover:bg-opacity-80 box_shadow`} />
                                             </article>
                                         </div>
                                         <section className="text-left mt-7 ml-1">

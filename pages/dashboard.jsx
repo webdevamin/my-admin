@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState, useRef } from "react";
 import Header from "../components/Layout/Header";
 import config from "../config/firebase";
@@ -12,22 +11,16 @@ import Seo from "../components/Seo";
 import ReservationInfoModal from "../components/Modals/ReservationInfoModal";
 import { getMessaging, getToken } from "firebase/messaging";
 import { v4 as uuidv4 } from 'uuid';
-import Alert from "../components/Alert";
 import InfoModal from "../components/Modals/InfoModal";
 import { initializeApp } from "firebase/app";
 import { MAX_ITEMS } from "../config/app";
 import { interpolate } from "../config/helpers";
 import Sidebar from "../components/Layout/Sidebar";
+import CardOne from "../components/Cards/CardOne";
+import { doesBrowserSupportNotificationAPI } from "../config/browser";
+import AlertError from "../components/AlertError";
 
 const lang = require('../lang/nl.json');
-
-const doesBrowserSupportNotificationAPI = () => {
-    return (
-        'Notification' in window &&
-        'serviceWorker' in navigator &&
-        'PushManager' in window
-    )
-}
 
 const app = initializeApp(config);
 const db = getFirestore(app);
@@ -39,11 +32,13 @@ const Dashboard = () => {
     const [doesBrowserSupportNotifs, setDoesBrowserSupportNotifs] = useState(true);
     const [showMenu, setShowMenu] = useState(false);
     const [error, setError] = useState(false);
+
     const deleteModalCompRef = useRef();
     const deleteAllModalCompRef = useRef();
     const reservationInfoModalCompRef = useRef();
     const noNotificationPermissionCompRef = useRef();
     const noNotificationSupportCompRef = useRef();
+
     useEffect(() => {
         const q = query(collection(db, "reservations"), orderBy("date_submitted", "desc"));
 
@@ -194,11 +189,7 @@ const Dashboard = () => {
             <Seo title={'Dashboard'} description={'Dashboard'} />
             <Header toggleMenu={toggleMenu} showMenu={showMenu} />
             <Sidebar show={showMenu} toggleMenu={toggleMenu} />
-            <Alert
-                description={error}
-                iconClass={'error'}
-                classes={'mb-5'}
-            />
+            <AlertError classes={`mb-5`} />
         </>
     )
 
@@ -223,7 +214,7 @@ const Dashboard = () => {
                     reservations.length >= 1 && (
                         <section className="mb-9">
                             <button onClick={handleOpenDeleteAll}
-                                className="bg-theme p-0 -mt-2 bg-transparent 
+                                className="p-0 -mt-2 bg-transparent 
                                 text-sm w-auto block">
                                 <span className="text-red opacity-100 
                                 font-medium border-b border-b-red
@@ -237,16 +228,13 @@ const Dashboard = () => {
                 {
                     reservations.length > MAX_ITEMS && (
                         <>
-                            <Alert
+                            <AlertError
                                 description={
                                     interpolate(
                                         lang.clearReservationsReminder.body,
                                         { max_items: MAX_ITEMS }
                                     )
-                                }
-                                iconClass={'error'}
-                                classes={'mb-5'}
-                            />
+                                } classes={'mb-5'} />
                         </>
                     )
                 }
@@ -256,40 +244,8 @@ const Dashboard = () => {
                             <section>
                                 {
                                     reservations.map((reservation) => {
-                                        const { id, data } = reservation;
-                                        const { name, phone, reservation_time, date_submitted, units } = data;
-
-                                        return (
-                                            <article className="card" key={id}>
-                                                <div className="card_left">
-                                                    <div className="circle">
-                                                        <span>{units}</span>
-                                                    </div>
-                                                    <div className="info">
-                                                        <h2>{name}</h2>
-                                                        <div className="flex items-center gap-2 mt-1">
-                                                            <FontAwesomeIcon icon="fa-solid fa-phone"
-                                                                className="text-xs" />
-                                                            <a href={`tel:${phone}`}>{phone}</a>
-                                                        </div>
-                                                        <div className="info_bottom">
-                                                            <div>
-                                                                <FontAwesomeIcon icon="fa-solid fa-clock"
-                                                                    className="text-xs" />
-                                                                <span>{date_submitted.split(" ")[1]}</span>
-                                                            </div>
-                                                            <div>
-                                                                <FontAwesomeIcon icon="fa-solid fa-utensils"
-                                                                    className="text-xs" />
-                                                                <span>{reservation_time}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <FontAwesomeIcon icon="fa-solid fa-trash"
-                                                    className="icon delete_btn" data-id={id} onClick={() => handleOpen(id)} />
-                                            </article>
-                                        )
+                                        return <CardOne key={reservation.id}
+                                            reservation={reservation} handleOpen={handleOpen} />
                                     })
                                 }
                             </section>
@@ -297,7 +253,7 @@ const Dashboard = () => {
                     )
                 }
                 {reservations.length < 1 && (
-                    <Alert iconClass={'error'} classes={'mt-10'}
+                    <AlertError classes={`mt-10`}
                         description={'Er zijn momenteel geen reserveringen beschikbaar'} />
                 )}
             </main>

@@ -4,6 +4,9 @@ const prod = process.env.NODE_ENV === "production";
 
 const nextConfig = withPWA({
   reactStrictMode: true,
+  images: {
+    domains: ["assets.website-files.com"],
+  },
   pwa: {
     // disable: prod ? false : true,
     // disable: true,
