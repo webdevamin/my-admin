@@ -56,10 +56,6 @@ button,
   }
 }
 
-.items {
-  @apply flex flex-col gap-3;
-}
-
 .error_icon {
   @apply text-rose-800;
 
@@ -68,21 +64,6 @@ button,
   }
 }
 
-.warning_icon {
-  @apply text-amber-700;
-
-  * {
-    @apply text-amber-700;
-  }
-}
-
-.success_icon {
-  @apply text-emerald-600;
-
-  * {
-    @apply text-emerald-600;
-  }
-}
 
 .box_shadow {
   box-shadow: 0px 20px 30px -10px;

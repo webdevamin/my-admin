@@ -17,6 +17,10 @@ module.exports = {
         orange: "#FCB068",
         green: "#9AE0BA",
       },
+      spacing: {
+        "0.5px": "0.5px",
+        "1px": "1px",
+      },
     },
   },
   plugins: [],
