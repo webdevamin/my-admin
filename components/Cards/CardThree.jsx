@@ -6,8 +6,8 @@ const CardThree = ({ device, handleOpenDeleteModal }) => {
     const { registered_at, last_logged_in } = data;
 
     return (
-        <article className={`text-dark bg-light p-7 rounded-xl 
-        mb-2 flex items-center justify-between`}>
+        <article className={`text-dark bg-light p-6 rounded-xl 
+        mb-3 flex items-center justify-between`}>
             <div className={`flex flex-col gap-5`}>
                 <div className={`flex flex-col gap-2`}>
                     <div>

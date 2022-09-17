@@ -24,7 +24,10 @@
   },
   "devicesInfo": {
     "title": "Ingelogde apparaten",
-    "body": "Hier ziet u een lijst met apparaten die deze app gebruiken. Het kan bijvoorbeeld uw collega's smartphone zijn. Het is belangrijk om ingelogde apparaten te verwijderen die niet meer gebruikt worden. Bijvoorbeeld het kan een smartphone van uw ex-collega zijn.",
+    "body": [
+      "Ingelogde apparaten zijn apparaten die push berichten ontvangen. M.a.w. als uw apparaat niet op de lijst staat, betekent dat u geen push berichten zult ontvangen. Dit komt hoogstwaarschijnlijk omdat uw device push messages niet ondersteunt.",
+      "Het is belangrijk om de apparaten van de lijst te verwijderen die lang niet gebruikt worden. U kunt ze opmerken door op 'Laatst aangemeld' te checken. Zijn ze maandenlang niet aangemeld geweest (bijvoorbeeld omdat een smartphone van uw collega kapot is), kunt u deze gerust wissen."
+    ],
     "disableKey": false,
     "noIcon": true
   },

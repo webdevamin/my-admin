@@ -32,6 +32,32 @@ const InfoModal = forwardRef(({ }, ref) => {
 
     const handleClose = () => destroyModal();
 
+    const InfoBody = () => {
+        if (typeof lang.body === 'object') {
+            return (
+                <div>
+                    {
+                        lang.body.map((text, index) => {
+                            return (
+                                <p className="text-sm text-gray-500 leading-6 mb-2 last:mb-0"
+                                    key={index}>
+                                    {text ? text : 'Beschrijving'}
+                                </p>
+                            )
+                        })
+                    }
+                </div>
+            )
+        }
+        else {
+            return (
+                <p className="text-sm text-gray-500 leading-6">
+                    {lang ? lang.body : 'Beschrijving'}
+                </p>
+            )
+        }
+    }
+
     return (
         <Transition.Root show={open || false} as={Fragment}>
             <Dialog
@@ -93,9 +119,7 @@ const InfoModal = forwardRef(({ }, ref) => {
                                             </Dialog.Title>
                                         </div>
                                         <div className="mt-4">
-                                            <p className="text-sm text-gray-500 leading-6">
-                                                {lang ? lang.body : 'Beschrijving'}
-                                            </p>
+                                            <InfoBody />
                                         </div>
                                     </div>
                                 </div>
