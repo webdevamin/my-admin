@@ -7,7 +7,7 @@ const CardTwo = ({ item }) => {
 
     return (
         <article className={`rounded-2xl flex justify-between 
-        p-4 mb-3 shadow-sm items-center bg-emerald-100 gap-3`}>
+        p-5 mb-3 shadow-sm items-center bg-emerald-100 gap-3`}>
             <div className={`flex justify-center items-center gap-6`}>
                 <Image src={image} width={80} height={80}
                     alt={title} className={`rounded-full`} />

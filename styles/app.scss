@@ -26,14 +26,6 @@ strong {
   @apply font-semibold;
 }
 
-.container_w {
-  @apply w-10/12 lg:w-10/12 mx-auto max-w-xl relative;
-}
-
-.input_container {
-  @apply w-full mb-4;
-}
-
 // Elements
 
 input,
@@ -42,8 +34,6 @@ button,
 .input {
   @apply rounded-xl p-4 border-none w-full bg-light;
 }
-
-
 
 // Misc
 
@@ -75,7 +65,7 @@ button,
   }
 }
 
-.text-white-all {
+.text_white_all {
   @apply text-white;
 
   * {
@@ -89,6 +79,32 @@ button,
   @apply transition hover:bg-opacity-90;
 }
 
-@import "base/typography";
-@import "components/button";
-@import "components/item";
+h1,
+.h1 {
+  @apply text-xl font-bold mb-5;
+}
+
+h2,
+.h2 {
+  @apply font-bold;
+}
+
+span {
+  @apply opacity-90;
+}
+
+button,
+.button,
+[type="submit"] {
+  @apply bg-theme text-white font-bold mt-5;
+
+  span {
+    @apply text-white;
+  }
+}
+
+.btn_shadow {
+  box-shadow: 0px 20px 30px -10px;
+
+  @apply text-theme transition hover:bg-opacity-90;
+}

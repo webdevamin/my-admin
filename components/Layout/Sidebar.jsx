@@ -35,7 +35,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                 cursor-pointer justify-center items-center rounded-xl 
                 hover:opacity-75 box_shadow`} onClick={closeMenu}>
                         <FontAwesomeIcon icon={`fa-solid fa-xmark`}
-                            className={`alert_icon text-white-all`} />
+                            className={`alert_icon text_white_all`} />
                     </div>
                     <ul className={`mt-12`}>
                         <li className={`pb-2.5 mb-2.5`}>
@@ -47,7 +47,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                                 hover:opacity-75 w-10 h-10 flex items-center 
                                 justify-center rounded-xl">
                                         <FontAwesomeIcon icon={`fa-solid fa-home`}
-                                            className={`alert_icon text-white-all`} />
+                                            className={`alert_icon text_white_all`} />
                                     </div>
                                     <span className={`font-semibold opacity-75`}>
                                         Dashboard
@@ -64,7 +64,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                                 hover:opacity-75 w-10 h-10 flex items-center 
                                 justify-center rounded-xl">
                                         <FontAwesomeIcon icon={`fa-solid fa-bookmark`}
-                                            className={`alert_icon text-white-all`} />
+                                            className={`alert_icon text_white_all`} />
                                     </div>
                                     <span className={`font-semibold opacity-75`}>
                                         Categoriëen
@@ -80,7 +80,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                                 text-emerald-500 transition-all ease-in-out hover:opacity-75
                                 w-10 h-10 flex items-center justify-center rounded-xl">
                                         <FontAwesomeIcon icon={`fa-solid fa-shirt`}
-                                            className={`alert_icon text-white-all`} />
+                                            className={`alert_icon text_white_all`} />
                                     </div>
                                     <span className={`font-semibold opacity-75`}>
                                         Items
@@ -97,7 +97,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                                 hover:opacity-75 w-10 h-10 flex items-center 
                                 justify-center rounded-xl">
                                         <FontAwesomeIcon icon={`fa-solid fa-screwdriver-wrench`}
-                                            className={`alert_icon text-white-all`} />
+                                            className={`alert_icon text_white_all`} />
                                     </div>
                                     <span className={`font-semibold opacity-75`}>
                                         Instellingen
@@ -112,7 +112,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                             justify-center rounded-xl text-red transition-all 
                             ease-in-out hover:opacity-75 box_shadow">
                                     <FontAwesomeIcon icon={`fa-solid fa-power-off`}
-                                        className={`alert_icon text-white-all`} />
+                                        className={`alert_icon text_white_all`} />
                                 </div>
                                 <span className={`text-dark font-semibold opacity-75`}>
                                     Afmelden

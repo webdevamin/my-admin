@@ -7,7 +7,7 @@ const CardOne = ({ reservation, handleOpen }) => {
 
     return (
         <article className={`bg-light rounded-2xl flex justify-between 
-        p-4 mb-3 shadow-sm items-center`}>
+        p-5 mb-3 shadow-sm items-center`}>
             <div className={`flex justify-center items-center gap-5`}>
                 <div className={`bg-dark h-10 w-10 p-6 rounded-full 
       flex items-center justify-center font-semibold 

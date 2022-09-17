@@ -77,7 +77,7 @@ const Home = () => {
                 <AlertError description={`Onjuist e-mailadres/wachtwoord`} />
               )}
               <div>
-                <div className="input_container">
+                <div className="w-full mb-4">
                   <label htmlFor="email">
                     Email address
                   </label>
@@ -85,7 +85,7 @@ const Home = () => {
                     placeholder='E-mailadres' value={form.email}
                     onChange={handleChange} />
                 </div>
-                <div className="input_container">
+                <div className="w-full mb-4">
                   <label htmlFor="password">
                     Password
                   </label>
