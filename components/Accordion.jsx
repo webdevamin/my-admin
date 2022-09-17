@@ -26,8 +26,14 @@ const Accordion = ({ device }) => {
             <div className={`mt-5 text-sm flex flex-col gap-1.5 
             overflow-hidden transition-all 
             ${toggleAccordion ? `mt-5 h-auto` : `mt-0 h-0`}`}>
-                <span><strong>Aangemaakt</strong>: {registered_at}</span>
-                <span><strong>Laatst aangemeld</strong>: {last_logged_in}</span>
+                <div>
+                    <strong>Aangemaakt:{' '}</strong>
+                    <span>{registered_at ? registered_at : `(Onbekend)`}</span>
+                </div>
+                <div>
+                    <strong>Laatst aangemeld:{' '}</strong>
+                    <span>{last_logged_in ? last_logged_in : `(Onbekend)`}</span>
+                </div>
             </div>
         </article>
     )
