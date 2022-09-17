@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import Header from "../components/Layout/Header";
 import config from "../config/firebase";
 import {
     collection, getFirestore, onSnapshot,
@@ -15,10 +14,11 @@ import InfoModal from "../components/Modals/InfoModal";
 import { initializeApp } from "firebase/app";
 import { MAX_ITEMS } from "../config/app";
 import { interpolate } from "../config/helpers";
-import Sidebar from "../components/Layout/Sidebar";
 import CardOne from "../components/Cards/CardOne";
 import { doesBrowserSupportNotificationAPI } from "../config/browser";
 import AlertError from "../components/AlertError";
+import { Top } from "../components/Layout/Top";
+import ServerError from "../components/Errors/ServerError";
 
 const lang = require('../lang/nl.json');
 
@@ -30,7 +30,6 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [doesAcceptNotifsPermission, setDoesAcceptNotifsPermission] = useState(true);
     const [doesBrowserSupportNotifs, setDoesBrowserSupportNotifs] = useState(true);
-    const [showMenu, setShowMenu] = useState(false);
     const [error, setError] = useState(false);
 
     const deleteModalCompRef = useRef();
@@ -167,30 +166,21 @@ const Dashboard = () => {
     }, [doesBrowserSupportNotifs])
 
     const handleOpen = (id) => {
-        deleteModalCompRef.current.handleOpen(id, lang.deleteReservation);
+        deleteModalCompRef.current.handleOpen(id, 'reservations', lang.deleteReservation);
     };
 
     const handleOpenDeleteAll = () => {
-        deleteAllModalCompRef.current.handleOpen(null, lang.deleteReservations);
+        deleteAllModalCompRef.current.handleOpen(null, 'reservations', lang.deleteReservations);
     };
 
     const handleOpenGuide = () => {
         reservationInfoModalCompRef.current.handleOpen();
     }
 
-    const toggleMenu = (toggle) => {
-        setShowMenu(toggle);
-    }
-
     if (loading) return <Loader />
 
     if (error) return (
-        <>
-            <Seo title={'Dashboard'} description={'Dashboard'} />
-            <Header toggleMenu={toggleMenu} showMenu={showMenu} />
-            <Sidebar show={showMenu} toggleMenu={toggleMenu} />
-            <AlertError classes={`mb-5`} />
-        </>
+        <ServerError title={`Dashboard`} description={`Dashboard`} />
     )
 
     return (
@@ -201,8 +191,7 @@ const Dashboard = () => {
             <ReservationInfoModal ref={reservationInfoModalCompRef} />
             <InfoModal ref={noNotificationSupportCompRef} />
             <InfoModal ref={noNotificationPermissionCompRef} />
-            <Header toggleMenu={toggleMenu} showMenu={showMenu} />
-            <Sidebar show={showMenu} toggleMenu={toggleMenu} />
+            <Top />
             <main>
                 <section className="heading_section mb-5">
                     <h1>Reserveringen</h1>

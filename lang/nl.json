@@ -21,5 +21,15 @@
   "deleteReservations": {
     "title": "Bevestiging",
     "body": "Alle reserveringen zullen uit de lijst gewist worden. Wilt u ze zeker verwijderen?"
+  },
+  "devicesInfo": {
+    "title": "Ingelogde apparaten",
+    "body": "Hier ziet u een lijst met apparaten die deze app gebruiken. Het kan bijvoorbeeld uw collega's smartphone zijn. Het is belangrijk om ingelogde apparaten te verwijderen die niet meer gebruikt worden. Bijvoorbeeld het kan een smartphone van uw ex-collega zijn die deze app niet meer gebruikt.",
+    "disableKey": false,
+    "noIcon": true
+  },
+  "deleteDevice": {
+    "title": "Bevestiging",
+    "body": "Weet u zeker dat u dit apparaat wil verwijderen?"
   }
 }

@@ -79,8 +79,12 @@ const InfoModal = forwardRef(({ }, ref) => {
                                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                         <div className="flex justify-center sm:justify-start 
                                         items-center gap-4">
-                                            <FontAwesomeIcon icon="fa-solid 
-                                            fa-triangle-exclamation" size="lg" />
+                                            {
+                                                (lang && !lang.noIcon) && (
+                                                    <FontAwesomeIcon icon="fa-solid 
+                                                    fa-triangle-exclamation" size="lg" />
+                                                )
+                                            }
                                             <Dialog.Title
                                                 as="h3"
                                                 className="text-lg leading-6 font-medium text-gray-900"

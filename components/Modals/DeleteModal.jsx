@@ -10,7 +10,7 @@ import {
 import { Dialog, Transition } from "@headlessui/react";
 import {
     doc as docTodo, deleteDoc,
-    getFirestore, collection, getDocs
+    getFirestore, getDocs, collection as firestoreCollection
 } from "firebase/firestore";
 import config from "../../config/firebase";
 import { initializeApp } from "firebase/app";
@@ -20,20 +20,22 @@ const DeleteModal = forwardRef(({ }, ref) => {
     const db = getFirestore(app);
 
     const [open, setOpen] = useState(false);
-    const [itemId, setItemId] = useState(null);
+    const [documentId, setDocumentId] = useState(null);
+    const [collection, setCollection] = useState('');
     const [lang, setLang] = useState(null);
 
     const cancelButtonRef = useRef(null);
 
     const destroyModal = () => {
         setOpen(false);
-        setItemId(null);
+        setDocumentId(null);
     };
 
     useImperativeHandle(ref, () => ({
-        handleOpen(id = null, lang) {
+        handleOpen(id = null, collection = "reservations", lang) {
             setOpen(true);
-            setItemId(id);
+            setDocumentId(id);
+            setCollection(collection);
             setLang(lang);
         },
     }));
@@ -42,14 +44,14 @@ const DeleteModal = forwardRef(({ }, ref) => {
 
     const remove = async () => {
         try {
-            if (itemId) {
-                await deleteDoc(docTodo(db, "reservations", itemId));
+            if (documentId) {
+                await deleteDoc(docTodo(db, collection, documentId));
             }
             else {
-                const querySnapshot = await getDocs(collection(db, "reservations"));
+                const querySnapshot = await getDocs(firestoreCollection(db, collection));
 
                 querySnapshot.forEach(async (doc) => {
-                    await deleteDoc(docTodo(db, "reservations", doc.id));
+                    await deleteDoc(docTodo(db, collection, doc.id));
                 });
             }
 
@@ -109,7 +111,7 @@ const DeleteModal = forwardRef(({ }, ref) => {
                                         >
                                             {lang ? lang.title : 'Bevestiging'}
                                         </Dialog.Title>
-                                        <div className="mt-2">
+                                        <div className="mt-5">
                                             <p className="text-sm text-gray-500">
                                                 {lang ? lang.body : 'Zeker verwijderen?'}
                                             </p>
@@ -124,7 +126,7 @@ const DeleteModal = forwardRef(({ }, ref) => {
                                     border border-transparent shadow-lg px-4 py-2 bg-red 
                                     text-base font-medium text-white hover:bg-dark 
                                     focus:outline-none focus:ring-2 focus:ring-offset-2 
-                                    focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm 
+                                    focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm mt-4
                                     transition-all"
                                     onClick={() => remove()}
                                 >
