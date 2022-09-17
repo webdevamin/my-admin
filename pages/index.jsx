@@ -49,7 +49,10 @@ const Home = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         Cookies.set('fb_admin_uid', user.uid);
-        router.push('/dashboard');
+        router.push({
+          pathname: '/dashboard',
+          query: { logged: true }
+        });
       }
     });
   }, [auth, router]);

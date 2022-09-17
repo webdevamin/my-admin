@@ -5,4 +5,10 @@ const interpolate = (str, values) => {
   });
 };
 
-export { interpolate };
+const getLocalDateAndTime = () => {
+  return new Date().toLocaleString("nl-BE", {
+    timeZone: "Europe/Brussels",
+  });
+};
+
+export { interpolate, getLocalDateAndTime };

@@ -13,12 +13,13 @@ import { v4 as uuidv4 } from 'uuid';
 import InfoModal from "../components/Modals/InfoModal";
 import { initializeApp } from "firebase/app";
 import { MAX_ITEMS } from "../config/app";
-import { interpolate } from "../config/helpers";
+import { getLocalDateAndTime, interpolate } from "../config/helpers";
 import CardOne from "../components/Cards/CardOne";
 import { doesBrowserSupportNotificationAPI } from "../config/browser";
 import AlertError from "../components/AlertError";
 import { Top } from "../components/Layout/Top";
 import ServerError from "../components/Errors/ServerError";
+import { useRouter } from "next/router";
 
 const lang = require('../lang/nl.json');
 
@@ -31,6 +32,8 @@ const Dashboard = () => {
     const [doesAcceptNotifsPermission, setDoesAcceptNotifsPermission] = useState(true);
     const [doesBrowserSupportNotifs, setDoesBrowserSupportNotifs] = useState(true);
     const [error, setError] = useState(false);
+
+    const router = useRouter();
 
     const deleteModalCompRef = useRef();
     const deleteAllModalCompRef = useRef();
@@ -65,7 +68,9 @@ const Dashboard = () => {
             try {
                 await setDoc(doc(db, "fcm_tokens", uuid), {
                     uuid: uuid,
-                    token_id: currentToken
+                    token_id: currentToken,
+                    registered_at: getLocalDateAndTime(),
+                    last_logged_in: getLocalDateAndTime()
                 });
 
                 localStorage.setItem('fcm_token', JSON.stringify({
@@ -85,11 +90,12 @@ const Dashboard = () => {
             if (docSnap.exists()) {
                 const { token_id: tokenIdDb } = docSnap.data();
 
-                if (currentToken !== tokenIdDb) {
-                    try {
+                try {
+                    if (currentToken !== tokenIdDb) {
                         await updateDoc(docRef, {
                             uuid: uuid,
-                            token_id: currentToken
+                            token_id: currentToken,
+                            last_logged_in: getLocalDateAndTime()
                         });
 
                         localStorage.removeItem("fcm_token");
@@ -97,16 +103,25 @@ const Dashboard = () => {
                             uuid: uuid,
                             token_id: currentToken
                         }));
-                    } catch (error) {
-                        console.log(error);
                     }
+                    else {
+                        if (router.query.logged === "true") {
+                            await updateDoc(docRef, {
+                                last_logged_in: getLocalDateAndTime()
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
             }
             else {
                 try {
                     await setDoc(doc(db, "fcm_tokens", uuid), {
                         uuid: uuid,
-                        token_id: currentToken
+                        token_id: currentToken,
+                        registered_at: getLocalDateAndTime(),
+                        last_logged_in: getLocalDateAndTime()
                     });
                 } catch (error) {
                     console.log(error);
