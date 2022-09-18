@@ -11,7 +11,7 @@ const CardOne = ({ reservation, handleOpen }) => {
             <div className={`flex justify-center items-center gap-5`}>
                 <div className={`bg-dark h-10 w-10 p-6 rounded-full 
       flex items-center justify-center font-semibold 
-      text-2xl text-dark box_shadow`}>
+      text-2xl text-dark shadow-alpha`}>
                     <span className={`text-white`}>
                         {units}
                     </span>
@@ -44,7 +44,7 @@ const CardOne = ({ reservation, handleOpen }) => {
             </div>
             <FontAwesomeIcon icon="fa-solid fa-trash"
                 className={`icon cursor-pointer text-red bg-red 
-                transition hover:bg-opacity-80 box_shadow`}
+                transition hover:bg-opacity-80 shadow-alpha`}
                 data-id={id} onClick={() => handleOpen(id)} />
         </article>
     )

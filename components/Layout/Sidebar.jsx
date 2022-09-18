@@ -33,7 +33,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                 <div className={`${show ? 'block' : 'hidden'}`}>
                     <div className={`bg-gray-700 w-10 h-10 flex text-gray-700 
                 cursor-pointer justify-center items-center rounded-xl 
-                hover:opacity-75 box_shadow`} onClick={closeMenu}>
+                hover:opacity-75 shadow-alpha`} onClick={closeMenu}>
                         <FontAwesomeIcon icon={`fa-solid fa-xmark`}
                             className={`alert_icon text_white_all`} />
                     </div>
@@ -42,7 +42,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                             <Link href={'/dashboard'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
-                                    <div className="bg-theme box_shadow
+                                    <div className="bg-theme shadow-alpha
                                 text-theme transition-all ease-in-out 
                                 hover:opacity-75 w-10 h-10 flex items-center 
                                 justify-center rounded-xl">
@@ -59,7 +59,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                             <Link href={'/#'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
-                                    <div className="bg-fuchsia-500 box_shadow
+                                    <div className="bg-fuchsia-500 shadow-alpha
                                 text-fuchsia-500 transition-all ease-in-out 
                                 hover:opacity-75 w-10 h-10 flex items-center 
                                 justify-center rounded-xl">
@@ -76,7 +76,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                             <Link href={'/items'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
-                                    <div className="bg-emerald-500 box_shadow
+                                    <div className="bg-emerald-500 shadow-alpha
                                 text-emerald-500 transition-all ease-in-out hover:opacity-75
                                 w-10 h-10 flex items-center justify-center rounded-xl">
                                         <FontAwesomeIcon icon={`fa-solid fa-shirt`}
@@ -92,7 +92,7 @@ const Sidebar = ({ show, toggleMenu }) => {
                             <Link href={'/settings'}>
                                 <a className={`flex items-center gap-5 transition-all 
                             ease-in-out`}>
-                                    <div className="bg-cyan-500 box_shadow
+                                    <div className="bg-cyan-500 shadow-alpha
                                 text-cyan-500 transition-all ease-in-out 
                                 hover:opacity-75 w-10 h-10 flex items-center 
                                 justify-center rounded-xl">
@@ -107,10 +107,10 @@ const Sidebar = ({ show, toggleMenu }) => {
                         </li>
                         <li className="list_item">
                             <button onClick={logout} className={`bg-transparent p-0 
-                        flex items-center gap-5 transition-all ease-in-out mt-0`}>
+                        flex items-center gap-5 transition-all ease-in-out mt-0 w-full`}>
                                 <div className="bg-red w-10 h-10 flex items-center 
                             justify-center rounded-xl text-red transition-all 
-                            ease-in-out hover:opacity-75 box_shadow">
+                            ease-in-out hover:opacity-75 shadow-alpha">
                                     <FontAwesomeIcon icon={`fa-solid fa-power-off`}
                                         className={`alert_icon text_white_all`} />
                                 </div>

@@ -83,20 +83,26 @@ const Home = () => {
                   </label>
                   <input type="email" name="email" id="email" required
                     placeholder='E-mailadres' value={form.email}
+                    className={`rounded-xl p-4 border-none w-full bg-light 
+                    focus:outline-theme outline-opacity-60`}
                     onChange={handleChange} />
                 </div>
                 <div className="w-full mb-4">
                   <label htmlFor="password">
                     Password
                   </label>
-                  <input type="password" name="password" id="password" required
-                    placeholder='Wachtwoord' value={form.password}
+                  <input type="password" name="password" id="password"
+                    required placeholder='Wachtwoord' value={form.password}
+                    className={`rounded-xl p-4 border-none w-full bg-light 
+                    focus:outline-theme outline-opacity-60`}
                     onChange={handleChange} />
                 </div>
               </div>
               <div>
-                <button type="submit" className='btn_shadow'>
-                  <span>Inloggen</span>
+                <button type="submit" className={`shadow-alpha text-theme 
+                rounded-xl p-4 border-none w-full bg-theme font-bold mt-5 
+                transition hover:bg-opacity-90` }>
+                  <span className={`text-white`}>Inloggen</span>
                 </button>
               </div>
             </form>
@@ -108,22 +114,3 @@ const Home = () => {
 }
 
 export default Home;
-
-export async function getServerSideProps(context) {
-  const { fb_admin_uid } = context.req.cookies;
-  const isTokenValid = fb_admin_uid === process.env.FB_ADMIN_UID;
-
-  if (isTokenValid) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/dashboard'
-      },
-      props: {},
-    }
-  }
-
-  return {
-    props: {},
-  }
-}

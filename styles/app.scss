@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-// Global
 * {
   @apply text-dark;
 
@@ -25,17 +24,6 @@ label {
 strong {
   @apply font-semibold;
 }
-
-// Elements
-
-input,
-button,
-.button,
-.input {
-  @apply rounded-xl p-4 border-none w-full bg-light;
-}
-
-// Misc
 
 .icon {
   @apply p-3 rounded-xl w-5 h-5 shadow-lg;
@@ -73,12 +61,6 @@ button,
   }
 }
 
-.box_shadow {
-  box-shadow: 0px 20px 20px -10px;
-
-  @apply transition hover:bg-opacity-90;
-}
-
 h1,
 .h1 {
   @apply text-xl font-bold mb-5;
@@ -91,20 +73,4 @@ h2,
 
 span {
   @apply opacity-90;
-}
-
-button,
-.button,
-[type="submit"] {
-  @apply bg-theme text-white font-bold mt-5;
-
-  span {
-    @apply text-white;
-  }
-}
-
-.btn_shadow {
-  box-shadow: 0px 20px 30px -10px;
-
-  @apply text-theme transition hover:bg-opacity-90;
 }

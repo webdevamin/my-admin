@@ -21,7 +21,7 @@ const CardThree = ({ device, handleOpenDeleteModal }) => {
             <div className={`flex items-center justify-between`}>
                 <FontAwesomeIcon icon="fa-solid fa-trash"
                     className={`icon cursor-pointer text-red bg-red 
-                        transition hover:bg-opacity-80 box_shadow`}
+                    transition hover:bg-opacity-90 shadow-alpha`}
                     data-id={id} onClick={() => handleOpenDeleteModal(id)} />
             </div>
         </article>

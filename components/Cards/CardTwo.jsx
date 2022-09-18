@@ -25,7 +25,7 @@ const CardTwo = ({ item }) => {
             </div>
             <FontAwesomeIcon icon="fa-solid fa-angle-right"
                 className="icon more_btn cursor-pointer 
-                transition hover:bg-opacity-80 box_shadow
+                transition hover:bg-opacity-80 shadow-alpha
                 bg-emerald-500 text-emerald-500" />
         </article>
     )

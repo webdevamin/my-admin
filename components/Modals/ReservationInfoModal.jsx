@@ -83,7 +83,7 @@ const ReservationInfoModal = forwardRef(({ }, ref) => {
                                                 <div className={`flex justify-center items-center gap-5`}>
                                                     <div className={`bg-dark h-10 w-10 p-6 rounded-full 
                                                     flex items-center justify-center font-semibold 
-                                                    text-2xl text-dark box_shadow`}>
+                                                    text-2xl text-dark shadow-alpha`}>
                                                         <span className={`text-white`}>
                                                             3
                                                         </span>
@@ -116,7 +116,7 @@ const ReservationInfoModal = forwardRef(({ }, ref) => {
                                                 </div>
                                                 <FontAwesomeIcon icon="fa-solid fa-trash"
                                                     className={`icon cursor-pointer text-red bg-red 
-                                                    transition hover:bg-opacity-80 box_shadow`} />
+                                                    transition hover:bg-opacity-80 shadow-alpha`} />
                                             </article>
                                         </div>
                                         <section className="text-left mt-7 ml-1">
