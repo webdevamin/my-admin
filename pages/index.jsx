@@ -8,6 +8,7 @@ import { initializeApp } from "firebase/app";
 import Lottie from "lottie-react";
 import admin from "/public/admin.json";
 import AlertError from "../components/AlertError";
+import { APP_NAME } from "../config/app";
 
 const initForm = {
   email: '', password: ''
@@ -67,7 +68,7 @@ const Home = () => {
         <div className="mt-8">
           <section className="mb-7 text-center">
             <h1 className="mb-2">
-              Welkom op My Admin
+              Welkom op {APP_NAME}
             </h1>
             <p>Login om verder te gaan</p>
           </section>

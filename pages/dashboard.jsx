@@ -129,36 +129,38 @@ const Dashboard = () => {
             }
         }
 
-        if (doesBrowserSupportNotificationAPI()) {
-            Notification.requestPermission().then((permission) => {
-                if (permission === 'granted') {
-                    const messaging = getMessaging(app);
-                    setDoesAcceptNotifsPermission(true);
+        if (process.env.ENABLE_PUSH_NOTIFICATIONS) {
+            if (doesBrowserSupportNotificationAPI()) {
+                Notification.requestPermission().then((permission) => {
+                    if (permission === 'granted') {
+                        const messaging = getMessaging(app);
+                        setDoesAcceptNotifsPermission(true);
 
-                    getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FB_WPUSH_CERT })
-                        .then((currentToken) => {
-                            if (currentToken) {
-                                const localToken = JSON.parse(localStorage.getItem('fcm_token'));
+                        getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FB_WPUSH_CERT })
+                            .then((currentToken) => {
+                                if (currentToken) {
+                                    const localToken = JSON.parse(localStorage.getItem('fcm_token'));
 
-                                if (!localToken) saveToken(uuidv4(), currentToken);
-                                else syncTokens(localToken, currentToken);
-                            } else {
-                                console.log('No registration token available. Request permission to generate one.');
-                            }
-                        }).catch((err) => {
-                            console.log('An error occurred while retrieving token. ', err);
-                        });
-                }
-                else {
-                    console.log('Notification permission blocked.');
-                    setDoesAcceptNotifsPermission(false);
-                }
-            });
+                                    if (!localToken) saveToken(uuidv4(), currentToken);
+                                    else syncTokens(localToken, currentToken);
+                                } else {
+                                    console.log('No registration token available. Request permission to generate one.');
+                                }
+                            }).catch((err) => {
+                                console.log('An error occurred while retrieving token. ', err);
+                            });
+                    }
+                    else {
+                        console.log('Notification permission blocked.');
+                        setDoesAcceptNotifsPermission(false);
+                    }
+                });
+            }
+            else {
+                setDoesBrowserSupportNotifs(false);
+            }
         }
-        else {
-            setDoesBrowserSupportNotifs(false);
-        }
-    }, [])
+    }, [router.query.logged])
 
     useEffect(() => {
         setTimeout(() => {

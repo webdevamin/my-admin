@@ -8,15 +8,11 @@ const CardThree = ({ device, handleOpenDeleteModal }) => {
     return (
         <article className={`text-dark bg-light p-5 rounded-xl 
         mb-3 flex items-center justify-between`}>
-            <div className={`flex flex-col gap-5`}>
-                <div className={`flex flex-col gap-2`}>
-                    <div>
-                        <div><strong>Laatst aangemeld</strong></div>
-                        <span>
-                            {last_logged_in ? last_logged_in : `N/A`}
-                        </span>
-                    </div>
-                </div>
+            <div className={`flex flex-col gap-1`}>
+                <div><strong>Laatst aangemeld</strong></div>
+                <span>
+                    {last_logged_in ? last_logged_in : `N/A`}
+                </span>
             </div>
             <div className={`flex items-center justify-between`}>
                 <FontAwesomeIcon icon="fa-solid fa-trash"
